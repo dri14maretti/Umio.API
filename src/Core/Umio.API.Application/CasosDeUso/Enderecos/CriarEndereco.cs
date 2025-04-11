@@ -17,7 +17,7 @@ namespace Umio.API.Application.CasosDeUso.Enderecos
         }
         public async Task<bool> Executar(CriarEnderecoRequest request, Guid clienteId)
         {
-            var cliente = _clienteRepository.BuscarClientePorId(clienteId);
+            var cliente = await _clienteRepository.BuscarClientePorId(clienteId);
 
             if(cliente == null)
             {
@@ -32,7 +32,7 @@ namespace Umio.API.Application.CasosDeUso.Enderecos
                 request.Estado, 
                 request.Numero, 
                 request.Complemento,
-                Guid.NewGuid());
+                clienteId);
 
             return await _enderecoRepository.CriarEndereco(endereco);
 
