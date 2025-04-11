@@ -22,18 +22,17 @@
             UsuarioId = usuarioId;
         }
 
-        private Endereco(string cep, string rua, string bairro, string cidade, string uf, Guid usuarioId)
+        private Endereco(string cep, string rua, string bairro, string cidade, string uf)
         {
             Cep = cep;
             Rua = rua;
             Bairro = bairro;
             Cidade = cidade;
             UF = uf;
-            UsuarioId = usuarioId;
         }
-        public static Endereco CriarEnderecoSemNumero(string cep, string rua, string bairro, string cidade, string uf, Guid usuarioId)
+        public static Endereco CriarEnderecoSemNumero(string cep, string rua, string bairro, string cidade, string uf)
         {
-            return new Endereco(cep, rua, bairro, cidade, uf, usuarioId);
+            return new Endereco(cep, rua, bairro, cidade, uf);
         }
 
         public static Endereco CriarNovoEndereco(string cep, string rua, string bairro, string cidade, string uf, int numero, Guid usuarioId)
