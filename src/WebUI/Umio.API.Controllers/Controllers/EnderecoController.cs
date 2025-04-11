@@ -10,14 +10,16 @@ namespace Umio.API.Controllers.Controllers
     {
         private readonly IBuscarEnderecoApiExterna _buscarEnderecoApiExterna;
         private readonly ICriarEndereco _criarEndereco;
+        private readonly IBuscarEnderecosCliente _buscarEnderecosCliente;
 
-        public EnderecoController(IBuscarEnderecoApiExterna buscarEnderecoApiExterna, ICriarEndereco criarEndereco)
+        public EnderecoController(IBuscarEnderecoApiExterna buscarEnderecoApiExterna, ICriarEndereco criarEndereco, IBuscarEnderecosCliente buscarEnderecosCliente)
         {
             _buscarEnderecoApiExterna = buscarEnderecoApiExterna;
             _criarEndereco = criarEndereco;
+            _buscarEnderecosCliente = buscarEnderecosCliente;
         }
 
-        [HttpGet("{cep}")]
+        [HttpGet("porCep/{cep}")]
         public async Task<IActionResult> Get(string cep)
         {
             var endereco = await _buscarEnderecoApiExterna.Executar(cep);
@@ -25,12 +27,20 @@ namespace Umio.API.Controllers.Controllers
             return Ok(endereco);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> CriarNovoEndereco(CriarEnderecoRequest request)
+        [HttpPost("{clienteId}")]
+        public async Task<IActionResult> CriarNovoEndereco(Guid clienteId, [FromBody]CriarEnderecoRequest request)
         {
-            var endereco = await _criarEndereco.Executar(request);
+            var endereco = await _criarEndereco.Executar(request, clienteId);
 
             return Created();
+        }
+        
+        [HttpGet("{clienteId}")]
+        public async Task<IActionResult> BuscarEnderecosCliente(Guid clienteId)
+        {
+            var enderecos = await _buscarEnderecosCliente.Executar(clienteId);
+
+            return Ok(enderecos);
         }
     }
 }

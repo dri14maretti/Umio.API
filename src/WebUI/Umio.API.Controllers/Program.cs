@@ -1,6 +1,7 @@
 using Umio.API.Application;
 using Umio.API.ViaCepService;
 using Umio.API.Postgres;
+using Umio.API.Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +15,9 @@ builder.Services.AddSwaggerGen();
 builder.Services
     .AdicionarAplicacao()
     .AdicionarViaCepService()
-    .AdicionarPostgres() ;
+    .AdicionarPostgres();
+
+builder.Services.AddTransient<ManipuladorExcecoesApi>();
 
 var app = builder.Build();
 
