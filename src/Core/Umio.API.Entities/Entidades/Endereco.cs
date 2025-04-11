@@ -9,9 +9,10 @@
         public string Cidade { get; private set; }
         public string UF { get; private set; }
         public int Numero { get; private set; }
+        public string? Complemento { get; private set; }
         public Guid UsuarioId { get; private set; }
 
-        private Endereco(string cep, string rua, string bairro, string cidade, string uf, int numero, Guid usuarioId)
+        private Endereco(string cep, string rua, string bairro, string cidade, string uf, int numero, string complemento, Guid usuarioId)
         {
             Cep = cep;
             Rua = rua;
@@ -22,23 +23,22 @@
             UsuarioId = usuarioId;
         }
 
-        private Endereco(string cep, string rua, string bairro, string cidade, string uf, Guid usuarioId)
+        private Endereco(string cep, string rua, string bairro, string cidade, string uf)
         {
             Cep = cep;
             Rua = rua;
             Bairro = bairro;
             Cidade = cidade;
             UF = uf;
-            UsuarioId = usuarioId;
         }
-        public static Endereco CriarEnderecoSemNumero(string cep, string rua, string bairro, string cidade, string uf, Guid usuarioId)
+        public static Endereco CriarEnderecoSemNumero(string cep, string rua, string bairro, string cidade, string uf)
         {
-            return new Endereco(cep, rua, bairro, cidade, uf, usuarioId);
+            return new Endereco(cep, rua, bairro, cidade, uf);
         }
 
-        public static Endereco CriarNovoEndereco(string cep, string rua, string bairro, string cidade, string uf, int numero, Guid usuarioId)
+        public static Endereco CriarNovoEndereco(string cep, string rua, string bairro, string cidade, string uf, int numero, string complemento, Guid usuarioId)
         {
-            return new Endereco(cep, rua, bairro, cidade, uf, numero, usuarioId);
+            return new Endereco(cep, rua, bairro, cidade, uf, numero, complemento, usuarioId);
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using Umio.API.Application.CasosDeUso.Enderecos.Interfaces;
-using Umio.API.Application.Contratos;
+using Umio.API.Application.Contratos.Servicos;
 using Umio.API.Entities.Entidades;
 
 namespace Umio.API.Application.CasosDeUso.Enderecos
 {
-    public class BuscarEnderecoApiExterna : IBuscarEnderecoApiExterna
+    internal class BuscarEnderecoApiExterna : IBuscarEnderecoApiExterna
     {
         private readonly ICepService _cepService;
 

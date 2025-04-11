@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Umio.API.Application\Umio.API.Application.csproj" />
+    <ProjectReference Include="..\..\Infra\Umio.API.Postgres\Umio.API.Postgres.csproj" />
     <ProjectReference Include="..\..\Infra\Umio.API.ViaCepService\Umio.API.ViaCepService.csproj" />
   </ItemGroup>
 

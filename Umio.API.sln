@@ -11,15 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{37C507D0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebUI", "WebUI", "{EF44FB37-C9B5-495C-A98D-A0082F4DB65D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umio.API.Controllers", "src\WebUI\Umio.API.Controllers\Umio.API.Controllers.csproj", "{73F1DEF4-9BC4-4B7F-8564-865AB7F3458C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umio.API.Controllers", "src\WebUI\Umio.API.Controllers\Umio.API.Controllers.csproj", "{73F1DEF4-9BC4-4B7F-8564-865AB7F3458C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{719D1E65-FEBB-4906-B4C6-798F175C8A0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umio.API.Entities", "src\Core\Umio.API.Entities\Umio.API.Entities.csproj", "{C6C8AA28-DB40-443B-BCA8-592E24FF40E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umio.API.Entities", "src\Core\Umio.API.Entities\Umio.API.Entities.csproj", "{C6C8AA28-DB40-443B-BCA8-592E24FF40E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umio.API.Application", "src\Core\Umio.API.Application\Umio.API.Application.csproj", "{D06DDC35-F493-4EA9-9AF5-A5D3AC88C9BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umio.API.Application", "src\Core\Umio.API.Application\Umio.API.Application.csproj", "{D06DDC35-F493-4EA9-9AF5-A5D3AC88C9BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umio.API.ViaCepService", "src\Infra\Umio.API.ViaCepService\Umio.API.ViaCepService.csproj", "{F5362763-C08F-4E36-B7B3-BCD2ECAEC2D3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umio.API.ViaCepService", "src\Infra\Umio.API.ViaCepService\Umio.API.ViaCepService.csproj", "{F5362763-C08F-4E36-B7B3-BCD2ECAEC2D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umio.API.Postgres", "src\Infra\Umio.API.Postgres\Umio.API.Postgres.csproj", "{2093993F-99D2-4C26-BC5B-BECEC37FD7C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{F5362763-C08F-4E36-B7B3-BCD2ECAEC2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5362763-C08F-4E36-B7B3-BCD2ECAEC2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5362763-C08F-4E36-B7B3-BCD2ECAEC2D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2093993F-99D2-4C26-BC5B-BECEC37FD7C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2093993F-99D2-4C26-BC5B-BECEC37FD7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2093993F-99D2-4C26-BC5B-BECEC37FD7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2093993F-99D2-4C26-BC5B-BECEC37FD7C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +61,7 @@ Global
 		{C6C8AA28-DB40-443B-BCA8-592E24FF40E3} = {719D1E65-FEBB-4906-B4C6-798F175C8A0B}
 		{D06DDC35-F493-4EA9-9AF5-A5D3AC88C9BC} = {719D1E65-FEBB-4906-B4C6-798F175C8A0B}
 		{F5362763-C08F-4E36-B7B3-BCD2ECAEC2D3} = {37C507D0-3B7B-4DDF-83C2-3F468DA17468}
+		{2093993F-99D2-4C26-BC5B-BECEC37FD7C8} = {37C507D0-3B7B-4DDF-83C2-3F468DA17468}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {82580FA6-307F-4E4A-A77E-4738FB1FB8D2}

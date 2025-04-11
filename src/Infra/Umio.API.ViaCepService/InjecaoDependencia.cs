@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Umio.API.Application.Contratos;
+using Umio.API.Application.Contratos.Servicos;
 using Umio.API.ViaCepService.Services;
 
 namespace Umio.API.ViaCepService

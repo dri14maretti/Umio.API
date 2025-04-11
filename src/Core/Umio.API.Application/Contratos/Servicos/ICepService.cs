@@ -1,6 +1,6 @@
 ﻿using Umio.API.Entities.Entidades;
 
-namespace Umio.API.Application.Contratos
+namespace Umio.API.Application.Contratos.Servicos
 {
     public interface ICepService
     {
