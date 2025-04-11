@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Umio.API.Application.Contratos;
+using Umio.API.Application.Contratos.Servicos;
 using Umio.API.Entities.Entidades;
 using Umio.API.ViaCepService.Models;
 
