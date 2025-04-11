@@ -9,5 +9,10 @@ namespace Umio.API.Postgres
         {
             return true;
         }
+
+        public async Task<Cliente> BuscarClientePorId(Guid clienteId)
+        {
+            return null;
+        }
     }
 }

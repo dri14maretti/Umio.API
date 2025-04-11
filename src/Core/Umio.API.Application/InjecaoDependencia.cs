@@ -12,6 +12,7 @@ namespace Umio.API.Application
         {
             services.AddTransient<IBuscarEnderecoApiExterna, BuscarEnderecoApiExterna>();
             services.AddTransient<ICriarEndereco, CriarEndereco>();
+            services.AddTransient<IBuscarEnderecosCliente, BuscarEnderecosCliente>();
 
             services.AddTransient<ICriarCliente, CriarCliente>();
 

@@ -5,6 +5,23 @@ namespace Umio.API.Postgres
 {
     class EnderecoRepository : IEnderecoRepository
     {
+        public async Task<IEnumerable<Endereco>> BuscarEnderecosCliente(Guid clienteId)
+        {
+            return new List<Endereco>()
+            {
+                Endereco.CriarNovoEndereco(
+                    "37701240",
+                    "Rua Doutor Domiciano Costa Moreira",
+                    "Pinheirinho",
+                    "Poços de Caldas",
+                    "MG",
+                    210,
+                    "APTO. 7",
+                    clienteId
+                )
+            };
+        }
+
         public async Task<bool> CriarEndereco(Endereco endereco)
         {
             return true;
