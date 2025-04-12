@@ -6,6 +6,12 @@ namespace Umio.API.Application.CasosDeUso.Enderecos
     internal class ExcluirEndereco : IExcluirEndereco
     {
         private readonly IEnderecoRepository _enderecoRepository;
+
+        public ExcluirEndereco(IEnderecoRepository enderecoRepository)
+        {
+            _enderecoRepository = enderecoRepository;
+        }
+
         public async Task<bool> Executar(Guid id)
         {
             var endereco = await _enderecoRepository.BuscarEnderecoPorId(id);
