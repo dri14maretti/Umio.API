@@ -13,10 +13,12 @@ namespace Umio.API.Entities.Entidades
         public string UF { get; private set; }
         public int Numero { get; private set; }
         public string? Complemento { get; private set; }
+        public bool Status { get; private set; }
         public Guid UsuarioId { get; private set; }
 
         private Endereco(string cep, string rua, string bairro, string cidade, string uf, int numero, string complemento, Guid usuarioId)
         {
+            Id = Guid.NewGuid();
             Cep = cep;
             Rua = rua;
             Bairro = bairro;
@@ -24,6 +26,7 @@ namespace Umio.API.Entities.Entidades
             UF = uf;
             Numero = numero;
             UsuarioId = usuarioId;
+            Status = true;
         }
 
         private Endereco(string cep, string rua, string bairro, string cidade, string uf)
@@ -34,6 +37,21 @@ namespace Umio.API.Entities.Entidades
             Cidade = cidade;
             UF = uf;
         }
+
+        private Endereco(Guid? id, string cep, string rua, string bairro, string cidade, string uF, int numero, string? complemento, bool status, Guid usuarioId)
+        {
+            Id = id;
+            Cep = cep;
+            Rua = rua;
+            Bairro = bairro;
+            Cidade = cidade;
+            UF = uF;
+            Numero = numero;
+            Complemento = complemento;
+            Status = status;
+            UsuarioId = usuarioId;
+        }
+
         public static Endereco CriarEnderecoSemNumero(string cep, string rua, string bairro, string cidade, string uf)
         {
             return new Endereco(cep, rua, bairro, cidade, uf);
@@ -59,6 +77,11 @@ namespace Umio.API.Entities.Entidades
                 throw new ExcecaoPropriedadeInvalida("Usuário inválido.", nameof(usuarioId));
 
             return new Endereco(cep, rua, bairro, cidade, uf, numero, complemento, usuarioId);
+        }
+
+        public static Endereco RecuperarEnderecoExistente(Guid? id, string cep, string rua, string bairro, string cidade, string uF, int numero, string? complemento, bool status, Guid usuarioId)
+        {
+            return new Endereco(id, cep, rua, bairro, cidade, uF, numero, complemento, status, usuarioId);
         }
     }
 }

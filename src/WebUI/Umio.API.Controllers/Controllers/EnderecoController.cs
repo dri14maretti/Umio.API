@@ -11,12 +11,14 @@ namespace Umio.API.Controllers.Controllers
         private readonly IBuscarEnderecoApiExterna _buscarEnderecoApiExterna;
         private readonly ICriarEndereco _criarEndereco;
         private readonly IBuscarEnderecosCliente _buscarEnderecosCliente;
+        private readonly IExcluirEndereco _excluirEndereco;
 
-        public EnderecoController(IBuscarEnderecoApiExterna buscarEnderecoApiExterna, ICriarEndereco criarEndereco, IBuscarEnderecosCliente buscarEnderecosCliente)
+        public EnderecoController(IBuscarEnderecoApiExterna buscarEnderecoApiExterna, ICriarEndereco criarEndereco, IBuscarEnderecosCliente buscarEnderecosCliente, IExcluirEndereco excluirEndereco)
         {
             _buscarEnderecoApiExterna = buscarEnderecoApiExterna;
             _criarEndereco = criarEndereco;
             _buscarEnderecosCliente = buscarEnderecosCliente;
+            _excluirEndereco = excluirEndereco;
         }
 
         [HttpGet("porCep/{cep}")]
