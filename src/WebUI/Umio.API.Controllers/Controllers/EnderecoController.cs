@@ -44,5 +44,13 @@ namespace Umio.API.Controllers.Controllers
 
             return Ok(enderecos);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> ExcluirEndereco(Guid id)
+        {
+            var endereco = await _excluirEndereco.Executar(id);
+
+            return Ok(endereco);
+        }
     }
 }
