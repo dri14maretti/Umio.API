@@ -1,4 +1,5 @@
-using Umio.API.Entities.ObjetosDeValor;
+using Umio.API.Entities.Entidades.Enums;
+
 namespace Umio.API.Entities.Entidades
 {
     public abstract class Pagamento
@@ -9,7 +10,7 @@ namespace Umio.API.Entities.Entidades
         public DateTime DataPagamento { get; private set; }
         public StatusPagamento Status { get; private set; }
         public string? ComprovanteUrl { get; private set; }
-        protected Pagamento(Guid id, Guid PedidoId, decimal valor, DateTime dataPagamento)
+        private Pagamento(Guid id, Guid PedidoId, decimal valor, DateTime dataPagamento)
         {
             this.Id = id;
             this.PedidoId = PedidoId;
@@ -36,7 +37,7 @@ namespace Umio.API.Entities.Entidades
             Status = StatusPagamento.Cancelado;
         }
 
-        protected virtual void Validar()
+        private virtual void Validar()
         {
             if (Valor <= 0)
                 throw new ArgumentException("Valor deve ser positivo");

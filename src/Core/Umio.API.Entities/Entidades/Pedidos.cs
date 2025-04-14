@@ -1,5 +1,5 @@
-using Umio.API.Entities.ObjetosDeValor;
 using Umio.API.Entities.Entidades.Produtos;
+using Umio.API.Entities.Entidades.Enums;
 
 namespace Umio.API.Entities.Entidades
 {
