@@ -1,4 +1,4 @@
-namespace Umio.API.Entities.ObjetosDeValor
+namespace Umio.API.Entities.Entidades.Enums
 {
     public enum TipoPagamento
     {
