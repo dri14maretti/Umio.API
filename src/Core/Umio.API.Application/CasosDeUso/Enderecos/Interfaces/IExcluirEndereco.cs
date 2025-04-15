@@ -2,6 +2,6 @@
 {
     public interface IExcluirEndereco
     {
-        public Task<bool> Executar(Guid id)
+        public Task<bool> Executar(Guid id);
     }
 }
