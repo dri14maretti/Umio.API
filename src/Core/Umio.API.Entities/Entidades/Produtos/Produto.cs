@@ -13,7 +13,7 @@
         public bool HabilitarMolhos { get; private set; }
         public bool HabilitarAcompanhamentos { get; private set; }
 
-        private Produto(Guid id, string nome, decimal preco, string descricao, string comentarios, string imagem)
+        public Produto(Guid id, string nome, decimal preco, string descricao, string comentarios, string imagem)
         {
             Id = id;
             Nome = nome;
@@ -22,6 +22,5 @@
             Comentarios = comentarios;
             Imagem = imagem;
         }
-
     }
 }

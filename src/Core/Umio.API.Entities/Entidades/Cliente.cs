@@ -4,9 +4,9 @@ namespace Umio.API.Entities.Entidades
     public partial class Cliente
     {
         public Guid Id { get; private set; }
-        public required string Nome { get; set; }
-        public required string Email { get; set; }
-        public required string Telefone { get; set; }
+        public string Nome { get; private set; }
+        public string Email { get; private set; }
+        public string Telefone { get; private set; }
         public int Pontos { get; private set; }
         public string FotoUrl { get; private set; } = "";
         public List<Endereco> Enderecos { get; private set; } = [];
