@@ -14,6 +14,7 @@
         public bool HabilitarAcompanhamentos { get; private set; }
 
         protected Produto(Guid id, string nome, decimal preco, string descricao, string comentarios, string imagem)
+
         {
             Id = id;
             Nome = nome;
@@ -22,6 +23,5 @@
             Comentarios = comentarios;
             Imagem = imagem;
         }
-
     }
 }
