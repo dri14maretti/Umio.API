@@ -43,7 +43,7 @@ namespace Umio.API.Postgres
             return true;
         }
 
-        public Task<bool> ExcluirEndereco(Guid id)
+        public async Task<bool> ExcluirEndereco(Guid id)
         {
             return true;
         }

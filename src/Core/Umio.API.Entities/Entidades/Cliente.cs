@@ -8,7 +8,7 @@ namespace Umio.API.Entities.Entidades
         public required string Email { get; set; }
         public required string Telefone { get; set; }
         public int Pontos { get; private set; }
-        public string FotoUrl { get; private set; } = "";
+        public string FotoUrl { get; set; } = "";
         public List<Endereco> Enderecos { get; private set; } = [];
         public List<Pedido> Pedidos { get; private set; } = [];
 
