@@ -7,16 +7,14 @@ namespace Umio.API.Application.CasosDeUso.Usuarios
     {
         private readonly List<Cliente> _clientes = clientes;
 
-        public Task<Cliente?> Execute(Guid id, string? nome, string? telefone, string? fotoUrl)
+        public async Task<Cliente?> Executar(Guid id, string? nome, string? telefone)
         {
             var cliente = _clientes.FirstOrDefault(c => c.Id == id);
-            if (cliente == null) return Task.FromResult<Cliente?>(null);
+            if (cliente == null) return null;
 
-            if (!string.IsNullOrEmpty(nome)) cliente.Nome = nome;
-            if (!string.IsNullOrEmpty(telefone)) cliente.Telefone = telefone;
-            if (!string.IsNullOrEmpty(fotoUrl)) cliente.FotoUrl = fotoUrl;
+            cliente.AtualizarCliente(nome, telefone);   
 
-            return Task.FromResult<Cliente?>(cliente);
+            return cliente;
         }
     }
 }

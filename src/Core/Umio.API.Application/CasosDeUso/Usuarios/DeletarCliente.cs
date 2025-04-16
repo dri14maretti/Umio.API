@@ -12,7 +12,7 @@ namespace Umio.API.Application.CasosDeUso.Usuarios
             _clientes = clientes;
         }
 
-        public Task<bool> Execute(Guid id)
+        public Task<bool> Executar(Guid id)
         {
             var cliente = _clientes.FirstOrDefault(c => c.Id == id);
             if (cliente == null) return Task.FromResult(false);

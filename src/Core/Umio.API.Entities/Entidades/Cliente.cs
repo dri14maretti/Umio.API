@@ -1,39 +1,26 @@
 ﻿using System.Text.RegularExpressions;
+using Umio.API.Entities.Exceptions;
+
 namespace Umio.API.Entities.Entidades
 {
-    public partial class Cliente
+    public class Cliente
     {
         public Guid Id { get; private set; }
         public string Nome { get; private set; }
         public string Email { get; private set; }
         public string Telefone { get; private set; }
         public int Pontos { get; private set; }
-        public string FotoUrl { get; set; } = "";
         public List<Endereco> Enderecos { get; private set; } = [];
         public List<Pedido> Pedidos { get; private set; } = [];
 
-        public Cliente(
-            string nome,
-            string email,
-            string telefone,
-            string? fotoUrl)
-        {
-            Id = Guid.NewGuid();
-            Nome = nome;
-            Email = ValidarEmail(email);
-            Telefone = ValidarTelefone(telefone);
-            FotoUrl = "";
-            Pontos = 0;
-            Enderecos = [];
-            Pedidos = [];
-        }
 
         private static string ValidarEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
                 throw new ArgumentException("Email não pode ser vazio");
 
-            if (!MyRegex().IsMatch(email))
+            var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            if (!emailRegex.IsMatch(email))
                 throw new ArgumentException("Email inválido");
 
             return email;
@@ -44,7 +31,7 @@ namespace Umio.API.Entities.Entidades
             var apenasNumeros = new string(telefone.Where(char.IsDigit).ToArray());
 
             if (apenasNumeros.Length < 11)
-                throw new ArgumentException("Telefone inválido (DDD + número)");
+                throw new ExcecaoPropriedadeInvalida(nameof(telefone));
 
             return apenasNumeros;
         }
@@ -62,8 +49,13 @@ namespace Umio.API.Entities.Entidades
 
             Pontos += pontos;
         }
+        public void AtualizarCliente(string nome, string telefone)
+        {
+            if (string.IsNullOrWhiteSpace(nome))
+                throw new ExcecaoPropriedadeInvalida(nameof(nome));
 
-        [GeneratedRegex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$")]
-        private static partial Regex MyRegex();
+            Nome = nome;
+            Telefone = ValidarTelefone(telefone);
+        }
     }
 }

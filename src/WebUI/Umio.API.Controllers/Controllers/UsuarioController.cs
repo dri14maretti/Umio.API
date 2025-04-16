@@ -35,11 +35,10 @@ namespace Umio.API.Controllers.Controllers
         {
             try
             {
-                var cliente = await _atualizarCliente.Execute(
+                var cliente = await _atualizarCliente.Executar(
                     id,
                     usuarioAtualizado.Nome,
-                    usuarioAtualizado.Telefone,
-                    usuarioAtualizado.FotoUrl
+                    usuarioAtualizado.Telefone
                 );
 
                 if (cliente == null) return NotFound("Cliente não encontrado.");
@@ -49,7 +48,6 @@ namespace Umio.API.Controllers.Controllers
                     Id = cliente.Id,
                     Nome = cliente.Nome,
                     Telefone = cliente.Telefone,
-                    FotoUrl = cliente.FotoUrl
                 });
             }
             catch (ArgumentException ex)
@@ -63,7 +61,7 @@ namespace Umio.API.Controllers.Controllers
         {
             if (id == Guid.Empty) return BadRequest("ID inválido.");
 
-            var cliente = await _deletarCliente.Execute(id);
+            var cliente = await _deletarCliente.Executar(id);
             if (cliente == null) return NotFound("Cliente não encontrado.");
             return NoContent();
         }
@@ -71,14 +69,13 @@ namespace Umio.API.Controllers.Controllers
         [HttpGet("listar-clientes-filtrados")]
         public async Task<IActionResult> ListarClientes([FromQuery] string? nome = null, [FromQuery] string? email = null)
         {
-            var clientes = await _listarClientes.Execute();
+            var clientes = await _listarClientes.Executar();
             var response = clientes.Select(c => new ClienteResponse(
                 c.Id,
                 c.Nome,
                 c.Email,
                 c.Telefone,
-                c.Pontos,
-                c.FotoUrl ?? string.Empty
+                c.Pontos
             ));
 
             return Ok(response);
