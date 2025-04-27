@@ -5,6 +5,5 @@ public record ClienteResponse(
     string Nome,
     string Email,
     string Telefone,
-    int Pontos,
-    string FotoUrl
+    int Pontos
 );

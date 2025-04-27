@@ -7,7 +7,7 @@ namespace Umio.API.Application.CasosDeUso.Usuarios
     public class ListarCliente : IListarCliente
     {
         private readonly List<Cliente> _clientes;
-        public Task<IEnumerable<Cliente>> Execute(string? nome = null, string? email = null, string? telefone = null)
+        public Task<IEnumerable<Cliente>> Executar(string? nome = null, string? email = null, string? telefone = null)
         {
             {
                 var query = _clientes.AsQueryable();
