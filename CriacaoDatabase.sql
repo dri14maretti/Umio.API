@@ -7,14 +7,14 @@ CREATE TABLE TipoCupom (
 
 CREATE TABLE Cupom (
     Codigo VARCHAR(50) PRIMARY KEY,
-    Status VARCHAR(50),
+    Ativo BOOLEAN DEFAULT TRUE,
     Porcentagem DECIMAL,
     TipoCupomId INT,
     FOREIGN KEY (TipoCupomId) REFERENCES TipoCupom(Id)
 );
 
 CREATE TABLE Cliente (
-    Id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    Id UUID PRIMARY KEY,
     Nome VARCHAR(255) NOT NULL,
     Email VARCHAR(255) UNIQUE NOT NULL,
     Telefone VARCHAR(20),
@@ -22,7 +22,7 @@ CREATE TABLE Cliente (
 );
 
 CREATE TABLE Endereco (
-    Id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    Id UUID PRIMARY KEY,
     Cep VARCHAR(10),
     Rua VARCHAR(255),
     Bairro VARCHAR(255),
@@ -39,7 +39,7 @@ CREATE TABLE Provedor (
 );
 
 CREATE TABLE Usuario (
-    Id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    Id UUID PRIMARY KEY,
     ProvedorId INT,
     ClienteId UUID UNIQUE,
     Senha VARCHAR(255),
