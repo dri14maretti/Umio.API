@@ -1,3 +1,5 @@
+using Umio.API.Entities.Entidades.Enums;
+
 namespace Umio.API.Application.CasosDeUso.Clientes.Inputs
 {
     public record CriarClienteInput(
@@ -5,6 +7,6 @@ namespace Umio.API.Application.CasosDeUso.Clientes.Inputs
         string Email,
         string Telefone,
         string Senha,
-        string Provedor
+        Provedor Provedor
     );
 }

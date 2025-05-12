@@ -10,6 +10,7 @@ using Npgsql;
 using System.Security.Cryptography;
 using System.Text;
 using Umio.API.Application.Contratos.Servicos;
+using Umio.API.Entities.Entidades.Enums;
 
 
 namespace Umio.API.Postgres
@@ -23,7 +24,7 @@ namespace Umio.API.Postgres
             _context = context;
         }
 
-        public async Task<bool> CriarUsuario(Guid clienteId, string senha, string provedor)
+        public async Task<bool> CriarUsuario(Guid clienteId, string senha, Provedor provedor)
         {
             var senhaCriptografada = CryptgrafaSenha.CryptoSenha(senha);
             var provedorId = ObterIdProvedor(provedor);
@@ -54,15 +55,15 @@ namespace Umio.API.Postgres
             return true;
         }
 
-        private int ObterIdProvedor(string provedor)
+        private int ObterIdProvedor(Provedor provedor)
         {
-            switch (provedor.ToLower())
+            switch (provedor)
             {
-                case "umio":
+                case Provedor.Umio:
                     return 0;
-                case "google":
+                case Provedor.Google:
                     return 1;
-                case "apple":
+                case Provedor.Apple:
                     return 2;
                 default:
                     throw new ArgumentException("Provedor inválido.");

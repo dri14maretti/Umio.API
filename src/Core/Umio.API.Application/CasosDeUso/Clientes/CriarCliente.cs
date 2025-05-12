@@ -17,7 +17,7 @@ namespace Umio.API.Application.CasosDeUso.Clientes
         }
         public async Task<CriarClienteOutput> Executar(CriarClienteInput cliente)
         {
-            if (!ValidadorSenhaForte.SenhaForte(cliente.Senha))
+            if (!Cliente.SenhaForte(cliente.Senha))
                 throw new ArgumentException("A senha deve conter pelo menos 6 caracteres, uma letra maiúscula, uma minúscula, um número e um caractere especial.");
                 
             var clienteCriado = await _clienteRepository.CriarCliente(cliente);

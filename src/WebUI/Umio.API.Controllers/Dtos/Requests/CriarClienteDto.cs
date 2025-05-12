@@ -1,3 +1,5 @@
+using Umio.API.Entities.Entidades.Enums;
+
 namespace Umio.API.Controllers.DTOs.Requests
 {
     public class CriarClienteRequest
@@ -9,10 +11,4 @@ namespace Umio.API.Controllers.DTOs.Requests
         public string Senha { get; set; }
     }
 
-    public enum Provedor
-    {
-        Umio,
-        Google,
-        Apple
-    }
 }

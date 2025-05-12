@@ -28,7 +28,7 @@ namespace Umio.API.Controllers.Controllers
             _listarClientes = listarClientes;
         }
 
-        [HttpPost("criar")]
+        [HttpPost]
         public async Task<IActionResult> Criar([FromBody] CriarClienteRequest request)
         {
             if (string.IsNullOrWhiteSpace(request.Nome)
@@ -43,14 +43,14 @@ namespace Umio.API.Controllers.Controllers
         request.Email,
         request.Telefone,
         request.Senha,
-        request.Provedor.ToString()
+        request.Provedor
         );
 
             var result = await _criarCliente.Executar(input);
             return Ok(result);
         }
 
-        [HttpPatch("atualizar/{id:guid}")]
+        [HttpPatch("{id:guid}")]
         public async Task<IActionResult> Atualizar(Guid id, [FromBody] AtualizarClienteRequest usuarioAtualizado)
         {
             try
@@ -70,7 +70,7 @@ namespace Umio.API.Controllers.Controllers
             }
         }
 
-        [HttpDelete("deletar/{id:guid}")]
+        [HttpDelete("{id:guid}")]
         public async Task<IActionResult> Deletar(Guid id)
         {
             if (id == Guid.Empty) return BadRequest("ID inválido.");
@@ -79,7 +79,7 @@ namespace Umio.API.Controllers.Controllers
             return cliente ? NoContent() : NotFound();
         }
 
-        [HttpGet("listar-com-filtros")]
+        [HttpGet]
         public async Task<IActionResult> ListarComFiltros([FromQuery] string? nome = null, [FromQuery] string? email = null, [FromQuery] Guid? id = null)
         {
             var clientes = await _listarClientes.Executar(nome, email, id);
