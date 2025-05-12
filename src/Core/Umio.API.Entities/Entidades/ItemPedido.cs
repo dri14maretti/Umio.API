@@ -1,6 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Umio.API.Entities.Entidades.Produtos;
 public class ItemPedido
 {
+    [Key]
     public Guid PedidoId { get; private set; }
     public Guid ProdutoId { get; private set; }
     public Produto? Produto { get; private set; }

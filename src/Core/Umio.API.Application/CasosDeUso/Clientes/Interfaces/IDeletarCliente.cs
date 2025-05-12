@@ -1,4 +1,4 @@
-namespace Umio.API.Application.CasosDeUso.Usuarios.Interfaces
+namespace Umio.API.Application.CasosDeUso.Clientes.Interfaces
 {
     public interface IDeletarCliente
     {

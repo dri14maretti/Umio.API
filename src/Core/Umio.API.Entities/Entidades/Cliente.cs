@@ -1,19 +1,35 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
 using Umio.API.Entities.Exceptions;
 
 namespace Umio.API.Entities.Entidades
 {
+    [Table("cliente")]
     public class Cliente
     {
+        [Key]
+        [Column("id")]
         public Guid Id { get; private set; }
+        [Column("nome")]
         public string Nome { get; private set; }
+        [Column("email")]
         public string Email { get; private set; }
+        [Column("telefone")]
         public string Telefone { get; private set; }
+        [Column("pontos")]
         public int Pontos { get; private set; }
         public List<Endereco> Enderecos { get; private set; } = [];
         public List<Pedido> Pedidos { get; private set; } = [];
 
-
+        public Cliente(string nome, string email, string telefone)
+        {
+            Id = Guid.NewGuid();
+            Nome = nome;
+            Email = ValidarEmail(email);
+            Telefone = ValidarTelefone(telefone);
+            Pontos = 0;
+        }
         private static string ValidarEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -49,13 +65,30 @@ namespace Umio.API.Entities.Entidades
 
             Pontos += pontos;
         }
-        public void AtualizarCliente(string nome, string telefone)
+        public void AtualizarCliente(string? nome = null, string? telefone = null, string? email = null, int? pontos = null)
         {
-            if (string.IsNullOrWhiteSpace(nome))
-                throw new ExcecaoPropriedadeInvalida(nameof(nome));
+            if (!string.IsNullOrWhiteSpace(nome))
+                Nome = nome;
 
-            Nome = nome;
-            Telefone = ValidarTelefone(telefone);
+            if (!string.IsNullOrWhiteSpace(telefone))
+
+                Telefone = ValidarTelefone(telefone);
+
+            if (!string.IsNullOrWhiteSpace(email))
+                Email = ValidarEmail(email);
+
+            if (pontos.HasValue)
+                Pontos = pontos.Value;
+        }
+
+        public static bool SenhaForte(string senha)
+        {
+            return !string.IsNullOrWhiteSpace(senha) &&
+            senha.Length >= 6 &&
+            senha.Any(char.IsUpper) &&
+            senha.Any(char.IsLower) &&
+            senha.Any(char.IsDigit) &&
+            senha.Any(c => !char.IsLetterOrDigit(c));
         }
     }
 }

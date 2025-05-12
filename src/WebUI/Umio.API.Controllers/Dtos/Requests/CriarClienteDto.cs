@@ -1,3 +1,5 @@
+using Umio.API.Entities.Entidades.Enums;
+
 namespace Umio.API.Controllers.DTOs.Requests
 {
     public class CriarClienteRequest
@@ -5,6 +7,8 @@ namespace Umio.API.Controllers.DTOs.Requests
         public string Nome { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }
+        public Provedor Provedor { get; set; }
         public string Senha { get; set; }
     }
+
 }

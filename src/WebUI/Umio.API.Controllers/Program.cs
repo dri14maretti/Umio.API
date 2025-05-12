@@ -2,6 +2,8 @@ using Umio.API.Application;
 using Umio.API.ViaCepService;
 using Umio.API.Postgres;
 using Umio.API.Controllers;
+using Umio.API.Postgres.Context;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,9 @@ builder.Services
     .AdicionarPostgres();
 
 builder.Services.AddTransient<ManipuladorExcecoesApi>();
+
+builder.Services.AddDbContext<UmioDbContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 var app = builder.Build();
 

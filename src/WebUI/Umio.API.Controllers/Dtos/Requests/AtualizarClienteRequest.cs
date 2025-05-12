@@ -2,6 +2,8 @@ namespace Umio.API.Controllers.Dtos.Requests
 {
     public record AtualizarClienteRequest(
         string? Nome,
-        string? Telefone
+        string? Telefone,
+        string? Email,
+        int? Pontos
     );
 }

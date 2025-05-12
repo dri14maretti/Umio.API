@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Umio.API.Application.CasosDeUso.Enderecos;
 using Umio.API.Application.CasosDeUso.Enderecos.Interfaces;
-using Umio.API.Application.CasosDeUso.Usuarios;
-using Umio.API.Application.CasosDeUso.Usuarios.Interfaces;
+using Umio.API.Application.CasosDeUso.Clientes;
+using Umio.API.Application.CasosDeUso.Clientes.Interfaces;
 
 namespace Umio.API.Application
 {
@@ -16,6 +16,9 @@ namespace Umio.API.Application
             services.AddTransient<IExcluirEndereco, ExcluirEndereco>();
 
             services.AddTransient<ICriarCliente, CriarCliente>();
+            services.AddScoped<IAtualizarCliente, AtualizarCliente>();
+            services.AddScoped<IDeletarCliente, DeletarCliente>();
+            services.AddScoped<IListarCliente, ListarCliente>();
 
             return services;
         }   

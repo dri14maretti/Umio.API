@@ -10,6 +10,8 @@ namespace Umio.API.Entities.Entidades
         public DateTime DataPagamento { get; private set; }
         public StatusPagamento Status { get; private set; }
         public string? ComprovanteUrl { get; private set; }
+
+        public Pagamento() { }
         protected Pagamento(Guid id, Guid PedidoId, decimal valor, DateTime dataPagamento)
         {
             this.Id = id;
