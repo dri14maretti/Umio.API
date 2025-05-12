@@ -2,7 +2,8 @@ namespace Umio.API.Entities.Entidades
 {
     public class Dinheiro : Pagamento
     {
-        public Dinheiro(Guid id, Guid clienteId, decimal valor, decimal? trocoPara = null): base(id, clienteId, valor, DateTime.UtcNow)
+        public Dinheiro() { }
+        public Dinheiro(Guid id, Guid clienteId, decimal valor, decimal? trocoPara = null) : base(id, clienteId, valor, DateTime.UtcNow)
         {
             TrocoPara = trocoPara;
             Validar();

@@ -9,6 +9,7 @@ namespace Umio.API.Postgres
         {
             services.AddTransient<IClienteRepository, ClienteRepository>();
             services.AddTransient<IEnderecoRepository, EnderecoRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
 
             return services;
         }

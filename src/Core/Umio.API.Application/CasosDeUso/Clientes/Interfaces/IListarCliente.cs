@@ -1,0 +1,9 @@
+using Umio.API.Entities.Entidades;
+
+namespace Umio.API.Application.CasosDeUso.Clientes.Interfaces
+{
+    public interface IListarCliente
+    {
+        Task<IEnumerable<Cliente>> Executar(string? nome = null, string? email = null, Guid? id = null);
+    }
+}
