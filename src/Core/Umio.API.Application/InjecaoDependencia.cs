@@ -3,6 +3,8 @@ using Umio.API.Application.CasosDeUso.Enderecos;
 using Umio.API.Application.CasosDeUso.Enderecos.Interfaces;
 using Umio.API.Application.CasosDeUso.Clientes;
 using Umio.API.Application.CasosDeUso.Clientes.Interfaces;
+using Umio.API.Application.CasosDeUso.Usuarios.Interfaces;
+using Umio.API.Application.CasosDeUso.Usuarios;
 
 namespace Umio.API.Application
 {
@@ -19,6 +21,8 @@ namespace Umio.API.Application
             services.AddScoped<IAtualizarCliente, AtualizarCliente>();
             services.AddScoped<IDeletarCliente, DeletarCliente>();
             services.AddScoped<IListarCliente, ListarCliente>();
+
+            services.AddTransient<ILoginUsuario, LoginUsuario>();
 
             return services;
         }   

@@ -13,28 +13,22 @@ namespace Umio.API.Postgres
         {
             _context = context;
         }
-        public async Task<Cliente> CriarCliente(CriarClienteInput clienteInput)
+        public async Task<bool> CriarCliente(Cliente cliente)
         {
-            var emailJaExiste = await _context.Clientes.AnyAsync(c => c.Email.ToLower() == clienteInput.Email.ToLower());
+            var emailJaExiste = await _context.Clientes.AnyAsync(c => c.Email.ToLower() == cliente.Email.ToLower());
             if (emailJaExiste)
             {
                 throw new InvalidOperationException("Já existe um cliente com este e-mail.");
             }
 
-            var telefoneJaExiste = await _context.Clientes.AnyAsync(c => c.Telefone == clienteInput.Telefone);
+            var telefoneJaExiste = await _context.Clientes.AnyAsync(c => c.Telefone == cliente.Telefone);
             if (telefoneJaExiste)
             {
                 throw new InvalidOperationException("Já existe um cliente com este telefone.");
             }
 
-            var clienteEntity = new Cliente(
-        clienteInput.Nome,
-        clienteInput.Email,
-        clienteInput.Telefone
-        );
-            _context.Clientes.Add(clienteEntity);
-            await _context.SaveChangesAsync();
-            return clienteEntity;
+            _context.Clientes.Add(cliente);
+            return await _context.SaveChangesAsync() >= 1;
         }
 
         public async Task<IEnumerable<Cliente>> ListarClientes(string? nome = null, string? email = null, Guid? id = null)

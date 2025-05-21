@@ -30,6 +30,11 @@ namespace Umio.API.Entities.Entidades
             Telefone = ValidarTelefone(telefone);
             Pontos = 0;
         }
+
+        public static Cliente CriarNovoCliente(string nome, string email, string telefone)
+        {
+            return new Cliente(nome, email, telefone);
+        }
         private static string ValidarEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))

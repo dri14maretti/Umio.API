@@ -1,16 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Umio.API.Application.Contratos.Repositorios;
-using Umio.API.Postgres.Context;
 using Microsoft.EntityFrameworkCore;
-using System.Numerics;
 using Npgsql;
-using System.Security.Cryptography;
-using System.Text;
+using Umio.API.Application.Contratos.Repositorios;
 using Umio.API.Application.Contratos.Servicos;
+using Umio.API.Entities.Entidades;
 using Umio.API.Entities.Entidades.Enums;
+using Umio.API.Postgres.Context;
 
 
 namespace Umio.API.Postgres
@@ -24,24 +18,25 @@ namespace Umio.API.Postgres
             _context = context;
         }
 
-        public async Task<bool> CriarUsuario(Guid clienteId, string senha, Provedor provedor)
+        public Task<IEnumerable<Usuario>> BuscarPorClienteId(Guid clienteId)
         {
-            var senhaCriptografada = CryptgrafaSenha.CryptoSenha(senha);
-            var provedorId = ObterIdProvedor(provedor);
+            throw new NotImplementedException();
+        }
 
-            var query = "INSERT INTO usuario (Id, ProvedorId, ClienteId, Senha) VALUES (@Id, @ProvedorId, @ClienteId, @Senha)";
+        public async Task<Usuario> BuscarPorClienteIdProvedorId(Guid clienteId, Provedor provedor)
+        {
+            var usuario = await _context.Usuarios
+                .FirstOrDefaultAsync(u => u.ClienteId == clienteId && u.Provedor == provedor);
 
-            var parameters = new[]
-            {
-        new NpgsqlParameter("@Id", Guid.NewGuid()),
-        new NpgsqlParameter("@ProvedorId", provedorId),
-        new NpgsqlParameter("@ClienteId", clienteId),
-        new NpgsqlParameter("@Senha", senhaCriptografada)
-    };
+            return usuario;
+        }
 
-            await _context.Database.ExecuteSqlRawAsync(query, parameters);
+        public async Task<bool> CriarUsuario(Usuario usuario)
+        {
+            //if (BuscarPorClienteIdProvedorId(usuario.ClienteId, usuario.Provedor) != null) throw new Exception();
 
-            return true;
+            _context.Usuarios.Add(usuario);
+            return await _context.SaveChangesAsync() >= 1;
         }
 
         public async Task<bool> DeletarPorClienteId(Guid clienteId)

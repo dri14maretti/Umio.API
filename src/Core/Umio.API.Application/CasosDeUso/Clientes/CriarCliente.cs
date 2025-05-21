@@ -1,7 +1,6 @@
 ﻿using Umio.API.Application.CasosDeUso.Clientes.Inputs;
 using Umio.API.Application.CasosDeUso.Clientes.Interfaces;
 using Umio.API.Application.Contratos.Repositorios;
-using Umio.API.Application.Contratos.Servicos;
 using Umio.API.Entities.Entidades;
 
 namespace Umio.API.Application.CasosDeUso.Clientes
@@ -19,9 +18,12 @@ namespace Umio.API.Application.CasosDeUso.Clientes
         {
             if (!Cliente.SenhaForte(cliente.Senha))
                 throw new ArgumentException("A senha deve conter pelo menos 6 caracteres, uma letra maiúscula, uma minúscula, um número e um caractere especial.");
-                
-            var clienteCriado = await _clienteRepository.CriarCliente(cliente);
-            await _usuarioRepository.CriarUsuario(clienteCriado.Id, cliente.Senha, cliente.Provedor);
+
+            var clienteCriado = Cliente.CriarNovoCliente(cliente.Nome, cliente.Email, cliente.Telefone);
+            var usuarioCriado = Usuario.CriarNovoUsuario(cliente.Senha, clienteCriado.Id, cliente.Provedor);
+
+            var clienteCriadoBanco = await _clienteRepository.CriarCliente(clienteCriado);
+            await _usuarioRepository.CriarUsuario(usuarioCriado);
             return new CriarClienteOutput(clienteCriado.Id, clienteCriado.Nome, clienteCriado.Email, clienteCriado.Telefone);
         }
     }

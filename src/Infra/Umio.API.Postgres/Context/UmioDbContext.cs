@@ -17,6 +17,8 @@ namespace Umio.API.Postgres.Context
 
         public DbSet<Pagamento> Pagamentos { get; set; }
 
+        public DbSet<Usuario> Usuarios { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

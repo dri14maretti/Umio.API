@@ -5,7 +5,7 @@ namespace Umio.API.Application.Contratos.Repositorios
 {
     public interface IClienteRepository
     {
-        Task<Cliente> CriarCliente(CriarClienteInput cliente);
+        Task<bool> CriarCliente(Cliente cliente);
         Task<Cliente> BuscarClientePorId(Guid clienteId);
         Task<bool> DeletarCliente(Guid clienteId);
         Task<Cliente> AtualizarCliente(Cliente cliente);
