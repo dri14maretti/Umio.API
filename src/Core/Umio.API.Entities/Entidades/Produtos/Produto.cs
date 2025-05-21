@@ -17,8 +17,10 @@ namespace Umio.API.Entities.Entidades.Produtos
         public string? Imagem { get; private set; }
         [Column("categoriaid")]
         public int CategoriaId { get; private set; }
+        [Column("ativo")]
+        public bool Ativo { get; private set; } = true;
 
-        private Produto(int id, string nome, decimal preco, string descricao, string imagem, int categoriaId)
+        private Produto(int id, string nome, decimal preco, string descricao, string imagem, int categoriaId, bool ativo)
         {
             Id = id;
             Nome = nome;
@@ -26,6 +28,7 @@ namespace Umio.API.Entities.Entidades.Produtos
             Descricao = descricao;
             Imagem = imagem;
             CategoriaId = categoriaId;
+            Ativo = ativo;
         }
     }
 }

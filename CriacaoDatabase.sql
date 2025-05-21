@@ -69,7 +69,7 @@ CREATE TABLE Produto (
     Descricao TEXT,
     CategoriaId INT,
     Imagem VARCHAR(255),
-	Ativo BOOLEAN
+	Ativo BOOLEAN,
     FOREIGN KEY (CategoriaId) REFERENCES CategoriaProduto(Id)
 );
 
