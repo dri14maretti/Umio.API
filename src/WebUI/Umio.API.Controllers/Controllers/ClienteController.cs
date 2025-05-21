@@ -39,12 +39,12 @@ namespace Umio.API.Controllers.Controllers
                 return BadRequest("Nome, e-mail, telefone, provedor e senha são obrigatórios.");
 
             var input = new CriarClienteInput(
-        request.Nome,
-        request.Email,
-        request.Telefone,
-        request.Senha,
-        request.Provedor
-        );
+                request.Nome,
+                request.Email,
+                request.Telefone,
+                request.Senha,
+                request.Provedor
+            );
 
             var result = await _criarCliente.Executar(input);
             return Ok(result);

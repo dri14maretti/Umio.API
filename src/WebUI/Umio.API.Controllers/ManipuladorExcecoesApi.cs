@@ -24,7 +24,13 @@ namespace Umio.API.Controllers
             {
                 GerarHistoricoErros(exPropriedadeInvalida);
                 var json = GerarRetorno(context, exPropriedadeInvalida);
-                await GerarRespostaContexto(context, json);
+                await GerarRespostaContexto(context, json, HttpStatusCode.BadRequest);
+            }
+            catch (ExcecaoLogin exLogin)
+            {
+                GerarHistoricoErros(exLogin);
+                var json = GerarRetorno(context, exLogin);
+                await GerarRespostaContexto(context, json, HttpStatusCode.BadRequest);
             }
             catch (Exception ex)
             {

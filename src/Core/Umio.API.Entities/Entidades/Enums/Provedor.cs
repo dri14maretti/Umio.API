@@ -2,7 +2,7 @@ namespace Umio.API.Entities.Entidades.Enums
 {
     public enum Provedor
     {
-        Umio,
+        Umio = 1,
         Google,
         Apple
     }

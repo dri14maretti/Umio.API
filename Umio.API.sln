@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umio.API.Application", "src
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umio.API.ViaCepService", "src\Infra\Umio.API.ViaCepService\Umio.API.ViaCepService.csproj", "{F5362763-C08F-4E36-B7B3-BCD2ECAEC2D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umio.API.Postgres", "src\Infra\Umio.API.Postgres\Umio.API.Postgres.csproj", "{2093993F-99D2-4C26-BC5B-BECEC37FD7C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Umio.API.Postgres", "src\Infra\Umio.API.Postgres\Umio.API.Postgres.csproj", "{2093993F-99D2-4C26-BC5B-BECEC37FD7C8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Umio.API.TokenService", "Umio.API.TokenService\Umio.API.TokenService.csproj", "{FB3E0D26-7A19-448D-AD1A-190A1C6701F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{2093993F-99D2-4C26-BC5B-BECEC37FD7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2093993F-99D2-4C26-BC5B-BECEC37FD7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2093993F-99D2-4C26-BC5B-BECEC37FD7C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB3E0D26-7A19-448D-AD1A-190A1C6701F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB3E0D26-7A19-448D-AD1A-190A1C6701F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB3E0D26-7A19-448D-AD1A-190A1C6701F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB3E0D26-7A19-448D-AD1A-190A1C6701F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{D06DDC35-F493-4EA9-9AF5-A5D3AC88C9BC} = {719D1E65-FEBB-4906-B4C6-798F175C8A0B}
 		{F5362763-C08F-4E36-B7B3-BCD2ECAEC2D3} = {37C507D0-3B7B-4DDF-83C2-3F468DA17468}
 		{2093993F-99D2-4C26-BC5B-BECEC37FD7C8} = {37C507D0-3B7B-4DDF-83C2-3F468DA17468}
+		{FB3E0D26-7A19-448D-AD1A-190A1C6701F6} = {37C507D0-3B7B-4DDF-83C2-3F468DA17468}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {82580FA6-307F-4E4A-A77E-4738FB1FB8D2}
