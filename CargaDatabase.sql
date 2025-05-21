@@ -150,6 +150,8 @@ INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
 ('Guaraná Antarctica', 5.90, 'Lata de Guaraná Antarctica de 350ml', 10, NULL),
 ('Guaraná Antarctica Zero', 5.90, 'Lata de Guaraná Antarctica Zero de 350ml', 10, NULL);
 
+UPDATE Produto SET Ativo = TRUE; 
+
 -- Inserir dados na tabela Adicional
 INSERT INTO Adicional (Nome, Valor) VALUES
 ('Bacon Extra', 5.00),
