@@ -1,26 +1,34 @@
-﻿namespace Umio.API.Entities.Entidades.Produtos
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Umio.API.Entities.Entidades.Produtos
 {
+    [Table("produto")]
     public class Produto
     {
-        public Guid Id { get; private set; }
+        [Column("id")]
+        public int Id { get; private set; }
+        [Column("nome")]
         public string Nome { get; private set; }
+        [Column("preco")]
         public decimal Preco { get; private set; }
+        [Column("descricao")]
         public string Descricao { get; private set; }
-        public string Comentarios { get; private set; }
-        public string Imagem { get; private set; }
-        public string Categoria { get; private set; }
-        public bool HabilitarAdicionais { get; private set; }
-        public bool HabilitarMolhos { get; private set; }
-        public bool HabilitarAcompanhamentos { get; private set; }
+        [Column("imagem")]
+        public string? Imagem { get; private set; }
+        [Column("categoriaid")]
+        public int CategoriaId { get; private set; }
+        [Column("ativo")]
+        public bool Ativo { get; private set; } = true;
 
-        protected Produto(Guid id, string nome, decimal preco, string descricao, string comentarios, string imagem)
+        private Produto(int id, string nome, decimal preco, string descricao, string imagem, int categoriaId, bool ativo)
         {
             Id = id;
             Nome = nome;
             Preco = preco;
             Descricao = descricao;
-            Comentarios = comentarios;
             Imagem = imagem;
+            CategoriaId = categoriaId;
+            Ativo = ativo;
         }
     }
 }
