@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Umio.API.Entities.Entidades;
+using Umio.API.Entities.Entidades.Produtos;
 
 
 namespace Umio.API.Postgres.Context
 {
     public class UmioDbContext : DbContext
-
     {
         public UmioDbContext(DbContextOptions<UmioDbContext> options) : base(options) { }
 
@@ -18,6 +14,8 @@ namespace Umio.API.Postgres.Context
         public DbSet<Pagamento> Pagamentos { get; set; }
 
         public DbSet<Usuario> Usuarios { get; set; }
+
+        public DbSet<Produto> Produtos { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

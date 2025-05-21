@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Umio.API.Application.CasosDeUso.Enderecos;
-using Umio.API.Application.CasosDeUso.Enderecos.Interfaces;
 using Umio.API.Application.CasosDeUso.Clientes;
 using Umio.API.Application.CasosDeUso.Clientes.Interfaces;
-using Umio.API.Application.CasosDeUso.Usuarios.Interfaces;
+using Umio.API.Application.CasosDeUso.Enderecos;
+using Umio.API.Application.CasosDeUso.Enderecos.Interfaces;
+using Umio.API.Application.CasosDeUso.Produtos;
+using Umio.API.Application.CasosDeUso.Produtos.Interfaces;
 using Umio.API.Application.CasosDeUso.Usuarios;
+using Umio.API.Application.CasosDeUso.Usuarios.Interfaces;
 
 namespace Umio.API.Application
 {
@@ -23,6 +25,8 @@ namespace Umio.API.Application
             services.AddScoped<IListarCliente, ListarCliente>();
 
             services.AddTransient<ILoginUsuario, LoginUsuario>();
+
+            services.AddTransient<IListarProdutos, ListarProdutos>();
 
             return services;
         }   

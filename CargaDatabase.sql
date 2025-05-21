@@ -65,19 +65,90 @@ INSERT INTO StatusPedido (Status) VALUES
 ('Entregue'),
 ('Cancelado');
 
--- Inserir dados na tabela CategoriaProduto
 INSERT INTO CategoriaProduto (Categoria) VALUES
-('Pizzas'),
-('Hamburgueres'),
-('Bebidas'),
-('Sobremesas');
+('Massas'),
+('Saladas'),
+('Lanchinhos'),
+('Pastéis'),
+('Porções'),
+('Burgers 160g'),
+('Vegetarianos'),
+('Smash Frango'),
+('Smash Burgers'),
+('Bebidas');
 
--- Inserir dados na tabela Produto
-INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem, TipoProduto) VALUES
-('Pizza Calabresa', 55.00, 'Pizza de calabresa com cebola e mussarela', (SELECT Id FROM CategoriaProduto WHERE Categoria = 'Pizzas'), 'pizza_calabresa.jpg', 'Principal'),
-('Duplo Cheeseburger', 35.90, 'Dois hamburgueres, queijo, alface, tomate', (SELECT Id FROM CategoriaProduto WHERE Categoria = 'Hamburgueres'), 'duplo_cheeseburger.jpg', 'Principal'),
-('Refrigerante Lata', 7.00, 'Lata de 350ml', (SELECT Id FROM CategoriaProduto WHERE Categoria = 'Bebidas'), 'refri_lata.jpg', 'Bebida'),
-('Petit Gateau', 20.00, 'Bolo quente com sorvete', (SELECT Id FROM CategoriaProduto WHERE Categoria = 'Sobremesas'), 'petit_gateau.jpg', 'Sobremesa');
+-- Inserindo Produtos na tabela Produto
+-- Assumindo que os Ids da CategoriaProduto são gerados sequencialmente a partir de 1
+
+-- Massas (CategoriaId = 1)
+INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
+('Umió Mac''n Cheese', 31.90, 'Penne envolvido em um cremoso molho cheddar, acompanhado de pedacinhos de bacon para um toque irresistível de sabor.', 1, NULL),
+('Spaghetti na Manteiga', 31.90, 'Spaghetti solteado na manteiga, combinado com alho dourado, brócolis fresquinho, bacon e finalizado com uma chuva de parmesão derretido.', 1, NULL),
+('Penne ao Molho Gorgonzola', 31.90, 'Penne envolvido em um aveludado molho gorgonzola, finalizado com folhas frescas de manjericão para um aroma especial e um sabor marcante.', 1, NULL),
+('Spaghetti alla Napoletana', 31.90, 'Spaghetti envolvido em um suculento molho pomodoro caseiro, coberto com pedacinhos de bacon, uma generosa camada de parmesão ralado.', 1, NULL);
+
+-- Saladas (CategoriaId = 2)
+INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
+('Umió Caesar', 27.90, 'Uma deliciosa salada de alface americana, tomatinho cereja, queijo parmesão ralado e frango grelhado, acompanhada de molho Caesar especial.', 2, NULL);
+
+-- Lanchinhos (CategoriaId = 3)
+INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
+('Umió Misto Especial', 12.90, 'Nosso tradicional pão brioche fofinho, tostado e recheado com presunto, queijo mussarela, Catupiry Original e alface.', 3, NULL),
+('Frango Natural', 15.90, 'Nosso tradicional pão brioche fofinho, recheado de frango desfiado, Catupiry Original, alface, tomate, cebola roxa, batata palha.', 3, NULL);
+
+-- Pastéis (CategoriaId = 4)
+INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
+('Pastel 14x10cm', 9.90, 'Um delicioso pastel frito de massa 100% artesanal, acompanhado de um molho especial a sua escolha!', 4, NULL),
+('Pastel 14x21cm', 15.90, 'Um delicioso pastel frito de massa 100% artesanal, acompanhado de um molho especial a sua escolha!', 4, NULL);
+
+-- Porções (CategoriaId = 5)
+INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
+('Strogonoff de Frango', 29.90, 'Uma generosa porção do nosso irresistível strogonoff de frango, cremoso e cheio de sabor, acompanhada de batata palha crocante para completar.', 5, NULL),
+('Calabresa Acebolada', 22.90, 'Uma porção generosa de calabresa fatiada e grelhada na chapa, soltando aquele aroma irresistível, acompanhada de cebola douradinha.', 5, NULL),
+('Batata Rústica', 22.90, 'Uma porção deliciosa de batatas rústicas, crocantes por fora e macias por dentro, acompanhadas do molho de sua escolha: barbecue, cheddar ou maionese especial.', 5, NULL),
+('Onion Rings', 22.90, 'Uma porção de oito onion rings crocantes e douradinhas, fritinhas na medida certa, acompanhadas dos nossos molhos especiais para dar aquele toque final.', 5, NULL);
+
+-- Burgers 160g (CategoriaId = 6)
+INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
+('Do Meu Jeito é Mió (Burger 160g)', 21.90, 'Pão brioche, hambúrguer artesanal 160g. Agora é só montar do jeito que quiser!', 6, NULL),
+('Burger 160g', 25.90, 'Pão brioche, hambúrguer artesanal 160g, cheddar fatiado.', 6, NULL),
+('Salada 160g', 28.90, 'Pão brioche, hambúrguer artesanal 160g, cheddar fatiado, alface, tomate, cebola roxa e maionese especial.', 6, NULL),
+('Catupiry 160g', 32.90, 'Pão brioche, hambúrguer artesanal 160g, Catupiry (De Verdade) e cebola caramelizada.', 6, NULL),
+('Bacon 160g', 33.90, 'Pão brioche, hambúrguer artesanal 160g, american cheese, bacon, tomate e maionese especial.', 6, NULL),
+('Barbecue 160g', 33.90, 'Pão brioche, hambúrguer artesanal 160g, cheddar fatiado, bacon e molho barbecue.', 6, NULL),
+('Cheddar 160g', 35.90, 'Pão brioche, hambúrguer artesanal 160g, cheddar cremoso, bacon e molho cheddar.', 6, NULL),
+('Lanche Misterioso', 36.90, 'Confia no cozinheiro! Aqui é surpresa: você não escolhe os ingredientes. Só diga o que não gosta ou não pode comer. Quer montar tudo do seu jeito? Peça o ''Do Meu Jeito é Mió''.', 6, NULL),
+('Onion 160g', 38.90, 'Pão brioche, hambúrguer artesanal 160g, Catupiry (De Verdade), onion rings, bacon e cebola caramelizada.', 6, NULL),
+('Tower', 39.90, 'Pão brioche, 2 hambúrgueres de 160g, 2 vezes queijo cheddar fatiado, bacon e molho barbecue ou cheddar (você escolhe).', 6, NULL);
+
+-- Vegetarianos (CategoriaId = 7)
+INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
+('Do Meu Jeito é Mió (Incrível Veg)', 18.90, 'Pão brioche, incrível burger 100% vegetal (110g). Agora é só montar do jeito que quiser!', 7, NULL),
+('Incrível Veg', 31.90, 'Pão brioche, incrível burger 100% vegetal (110g), cheddar fatiado, ovo, alface, tomate, cebola roxa e maionese especial.', 7, NULL),
+('Gold', 32.90, 'Pão brioche, incrível burger 100% vegetal (110g), cheddar cremoso, cebola caramelizada, onion rings crocantes e molho barbecue.', 7, NULL),
+('Fantasy', 32.90, 'Pão brioche, incrível burger 100% vegetal (110g), Catupiry (De Verdade), onion rings crocantes e cebola caramelizada.', 7, NULL),
+('Quaresma', 20.90, 'Pão brioche, american cheese, ovo, alface, tomate, cebola roxa, batata palha e maionese especial.', 7, NULL);
+
+-- Smash Frango (CategoriaId = 8)
+INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
+('Do Meu Jeito é Mió (Frango)', 11.90, 'Pão brioche, hambúrguer smash 80g de frango. Agora é só montar do jeito que quiser!', 8, NULL),
+('Frango Smash', 21.90, 'Pão brioche, hambúrguer smash 80g de frango, cheddar fatiado, batata palha e relish de cebola roxa artesanal.', 8, NULL),
+('Frango Smash Bacon', 25.90, 'Pão brioche, hambúrguer smash 80g de frango, cheddar fatiado, bacon, tomate, batata palha e relish de cebola roxa artesanal.', 8, NULL),
+('Frango Smash Tudo', 28.90, 'Pão brioche, hambúrguer smash 80g de frango, cheddar fatiado, bacon, calabresa, ovo, alface, tomate, relish de cebola roxa artesanal e batata palha.', 8, NULL);
+
+-- Smash Burgers (CategoriaId = 9)
+INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
+('Do Meu Jeito é Mió (Smash)', 14.90, 'Pão brioche, hambúrguer smash 80g. Agora é só montar do jeito que quiser!', 9, NULL),
+('Smash Double Burger', 25.90, 'Pão brioche, dois hambúrgueres smash 80g, cheddar fatiado e batata palha.', 9, NULL),
+('Smash Bacon', 29.90, 'Pão brioche, hambúrguer smash 80g, cheddar fatiado, bacon, tomate e batata palha.', 9, NULL),
+('Smash Tudo', 32.90, 'Pão brioche, hambúrguer smash 80g, cheddar fatiado, bacon, calabresa, ovo, alface, tomate e batata palha.', 9, NULL);
+
+-- Bebidas (CategoriaId = 10)
+INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
+('Coca Cola', 5.90, 'Lata de Coca Cola de 350ml', 10, NULL),
+('Coca Cola Zero', 5.90, 'Lata de Coca Cola Zero de 350ml', 10, NULL),
+('Guaraná Antarctica', 5.90, 'Lata de Guaraná Antarctica de 350ml', 10, NULL),
+('Guaraná Antarctica Zero', 5.90, 'Lata de Guaraná Antarctica Zero de 350ml', 10, NULL);
 
 -- Inserir dados na tabela Adicional
 INSERT INTO Adicional (Nome, Valor) VALUES
@@ -172,7 +243,7 @@ END $$;
 
 -- Inserir dados na tabela CupomProduto (Quais produtos um cupom se aplica)
 INSERT INTO CupomProduto (CodigoCupom, ProdutoId) VALUES
-('PRIMEIRACOMPRA15', (SELECT Id FROM Produto WHERE Nome = 'Duplo Cheeseburger')), -- Cupom se aplica ao Duplo Cheeseburger
-('MAIS5OFF', (SELECT Id FROM Produto WHERE Nome = 'Refrigerante Lata')); -- Cupom se aplica ao Refrigerante Lata
+('PRIMEIRACOMPRA15', (SELECT Id FROM Produto WHERE Nome = 'Burger 160g')), -- Cupom se aplica ao Duplo Cheeseburger
+('MAIS5OFF', (SELECT Id FROM Produto WHERE Nome = 'Coca Cola Zero')); -- Cupom se aplica ao Refrigerante Lata
 -- O cupom FRETEZERO geralmente não se aplica a produtos específicos, mas ao pedido inteiro.
 -- Se ele precisasse estar aqui para alguma regra, a lógica seria diferente.
