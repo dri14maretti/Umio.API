@@ -1,22 +1,34 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
 using Umio.API.Entities.Exceptions;
 
 namespace Umio.API.Entities.Entidades
 {
+    [Table("endereco")]
     public class Endereco
     {
+        [Column("id")]
         public Guid? Id { get; private set; }
+        [Column("cep")]
         public string Cep { get; private set; }
+        [Column("rua")]
         public string Rua { get; private set; }
+        [Column("bairro")]
         public string Bairro { get; private set; }
+        [Column("cidade")]
         public string Cidade { get; private set; }
+        [Column("uf")]
         public string UF { get; private set; }
+        [Column("numero")]
         public int Numero { get; private set; }
+        [Column("complemento")]
         public string? Complemento { get; private set; }
-        public bool Status { get; private set; }
-        public Guid UsuarioId { get; private set; }
+        [Column("ativo")]
+        public bool Ativo { get; private set; }
+        [Column("clienteid")]
+        public Guid ClienteId { get; private set; }
 
-        private Endereco(string cep, string rua, string bairro, string cidade, string uf, int numero, string complemento, Guid usuarioId)
+        private Endereco(string cep, string rua, string bairro, string cidade, string uf, int numero, string complemento, bool ativo, Guid usuarioId)
         {
             Id = Guid.NewGuid();
             Cep = cep;
@@ -25,8 +37,9 @@ namespace Umio.API.Entities.Entidades
             Cidade = cidade;
             UF = uf;
             Numero = numero;
-            UsuarioId = usuarioId;
-            Status = true;
+            ClienteId = usuarioId;
+            Ativo = true;
+            Complemento = complemento;
         }
 
         private Endereco(string cep, string rua, string bairro, string cidade, string uf)
@@ -38,7 +51,7 @@ namespace Umio.API.Entities.Entidades
             UF = uf;
         }
 
-        private Endereco(Guid? id, string cep, string rua, string bairro, string cidade, string uF, int numero, string? complemento, bool status, Guid usuarioId)
+        public Endereco(Guid? id, string cep, string rua, string bairro, string cidade, string uF, int numero, string? complemento, bool ativo, Guid clienteId)
         {
             Id = id;
             Cep = cep;
@@ -48,8 +61,8 @@ namespace Umio.API.Entities.Entidades
             UF = uF;
             Numero = numero;
             Complemento = complemento;
-            Status = status;
-            UsuarioId = usuarioId;
+            Ativo = ativo;
+            ClienteId = clienteId;
         }
 
         public static Endereco CriarEnderecoSemNumero(string cep, string rua, string bairro, string cidade, string uf)
@@ -57,7 +70,7 @@ namespace Umio.API.Entities.Entidades
             return new Endereco(cep, rua, bairro, cidade, uf);
         }
 
-        public static Endereco CriarNovoEndereco(string cep, string rua, string bairro, string cidade, string uf, int numero, string complemento, Guid usuarioId)
+        public static Endereco CriarNovoEndereco(string cep, string rua, string bairro, string cidade, string uf, int numero, Guid clienteId, string? complemento = null)
         {
             if (string.IsNullOrWhiteSpace(cep) || !Regex.IsMatch(cep, @"^\d{8}$"))
                 throw new ExcecaoPropriedadeInvalida("CEP inválido.", nameof(cep));
@@ -71,17 +84,15 @@ namespace Umio.API.Entities.Entidades
                 throw new ExcecaoPropriedadeInvalida("UF inválido.", nameof(uf));
             if (numero <= 0)
                 throw new ExcecaoPropriedadeInvalida("Número inválido.", nameof(numero));
-            if (complemento != null && complemento.Length > 50)
-                throw new ExcecaoPropriedadeInvalida("Complemento inválido.", nameof(complemento));
-            if (usuarioId == Guid.Empty)
-                throw new ExcecaoPropriedadeInvalida("Usuário inválido.", nameof(usuarioId));
+            if (clienteId == Guid.Empty)
+                throw new ExcecaoPropriedadeInvalida("Usuário inválido.", nameof(clienteId));
 
-            return new Endereco(cep, rua, bairro, cidade, uf, numero, complemento, usuarioId);
+            return new Endereco(cep, rua, bairro, cidade, uf, numero, complemento, true, clienteId);
         }
 
-        public static Endereco RecuperarEnderecoExistente(Guid? id, string cep, string rua, string bairro, string cidade, string uF, int numero, string? complemento, bool status, Guid usuarioId)
+        public void DesativarEndereco()
         {
-            return new Endereco(id, cep, rua, bairro, cidade, uF, numero, complemento, status, usuarioId);
+            Ativo = false;
         }
     }
 }

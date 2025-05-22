@@ -17,6 +17,8 @@ namespace Umio.API.Postgres.Context
 
         public DbSet<Produto> Produtos { get; set; }
 
+        public DbSet<Endereco> Enderecos { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

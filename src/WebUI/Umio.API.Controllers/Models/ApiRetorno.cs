@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
 
 namespace Umio.API.Controllers.Models
 {
@@ -8,6 +9,7 @@ namespace Umio.API.Controllers.Models
         public T Dados { get; private set; }
         public string Mensagem { get; private set; }
         public bool Ok { get; private set; }
+        [JsonIgnore]
         public int? StatusCode { get; private set; }
 
         public static ApiRetorno<T> Falha(string mensagemErro)

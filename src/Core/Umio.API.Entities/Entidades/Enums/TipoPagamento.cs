@@ -5,6 +5,5 @@ namespace Umio.API.Entities.Entidades.Enums
         Dinheiro,
         Pix,
         CartaoCredito,
-        CartaoDebito,
     }
 }

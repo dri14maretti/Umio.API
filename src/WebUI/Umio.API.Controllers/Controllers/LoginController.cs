@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Umio.API.Application.CasosDeUso.Usuarios.Interfaces;
 using Umio.API.Controllers.Dtos.Requests;
+using Umio.API.Controllers.Models;
 
 namespace Umio.API.Controllers.Controllers
 {
@@ -21,7 +22,7 @@ namespace Umio.API.Controllers.Controllers
 
             var token = await loginUsuario.GerarToken(request.Email, request.Senha);
 
-            return Ok(token);
+            return Ok(ApiRetorno<string>.Sucesso(token));
         }
     }
 }

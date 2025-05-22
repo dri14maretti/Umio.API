@@ -19,10 +19,8 @@ namespace Umio.API.Entities.Entidades
         public string Telefone { get; private set; }
         [Column("pontos")]
         public int Pontos { get; private set; }
-        public List<Endereco> Enderecos { get; private set; } = [];
-        public List<Pedido> Pedidos { get; private set; } = [];
 
-        public Cliente(string nome, string email, string telefone)
+        private Cliente(string nome, string email, string telefone)
         {
             Id = Guid.NewGuid();
             Nome = nome;
@@ -30,6 +28,7 @@ namespace Umio.API.Entities.Entidades
             Telefone = ValidarTelefone(telefone);
             Pontos = 0;
         }
+
 
         public static Cliente CriarNovoCliente(string nome, string email, string telefone)
         {
@@ -55,13 +54,6 @@ namespace Umio.API.Entities.Entidades
                 throw new ExcecaoPropriedadeInvalida(nameof(telefone));
 
             return apenasNumeros;
-        }
-        public void AdicionarEndereco(Endereco endereco)
-        {
-            if (endereco == null)
-                throw new ArgumentNullException(nameof(endereco), "Endereço não pode ser nulo");
-
-            Enderecos.Add(endereco);
         }
         public void AdicionarPontos(int pontos)
         {

@@ -1,5 +1,6 @@
 ﻿using Umio.API.Application.CasosDeUso.Enderecos.Interfaces;
 using Umio.API.Application.Contratos.Repositorios;
+using Umio.API.Entities.Exceptions;
 
 namespace Umio.API.Application.CasosDeUso.Enderecos
 {
@@ -14,13 +15,6 @@ namespace Umio.API.Application.CasosDeUso.Enderecos
 
         public async Task<bool> Executar(Guid id)
         {
-            var endereco = await _enderecoRepository.BuscarEnderecoPorId(id);
-
-            if(endereco == null)
-            {
-                throw new Exception("Endereço não encontrado");
-            }
-
             await _enderecoRepository.ExcluirEndereco(id);
 
             return true; // Exemplo de retorno, substitua pela lógica real

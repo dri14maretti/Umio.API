@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Umio.API.Application.CasosDeUso.Produtos.Interfaces;
+using Umio.API.Controllers.Models;
+using Umio.API.Entities.Entidades.Produtos;
 
 namespace Umio.API.Controllers.Controllers
 {
@@ -17,7 +19,7 @@ namespace Umio.API.Controllers.Controllers
         {
             var produtos = await _listarProdutos.Executar();
 
-            return Ok(produtos);
+            return Ok(ApiRetorno<IEnumerable<Produto>>.Sucesso(produtos));
         }
     }
 }

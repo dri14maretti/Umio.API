@@ -26,7 +26,7 @@ CREATE TABLE Endereco (
     Cep VARCHAR(10),
     Rua VARCHAR(255),
     Bairro VARCHAR(255),
-    Numero VARCHAR(50),
+    Numero INT,
     Cidade VARCHAR(255),
     Uf VARCHAR(2),
     ClienteId UUID,
