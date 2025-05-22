@@ -33,9 +33,9 @@ DECLARE
 BEGIN
     -- Inserir dados na tabela Endereco
     INSERT INTO Endereco (Id, Cep, Rua, Bairro, Numero, Cidade, Uf, ClienteId) VALUES
-    (gen_random_uuid(), '01001-000', 'Rua da Paz', 'Centro', '150', 'Sao Paulo', 'SP', joao_id),
-    (gen_random_uuid(), '20040-001', 'Av. Central', 'Centro', '500 Bl 2', 'Rio de Janeiro', 'RJ', maria_id),
-    (gen_random_uuid(), '30130-000', 'Av. Afonso Pena', 'Centro', '1000 Ap 301', 'Belo Horizonte', 'MG', pedro_id);
+    (gen_random_uuid(), '01001-000', 'Rua da Paz', 'Centro', 150, 'Sao Paulo', 'SP', joao_id),
+    (gen_random_uuid(), '20040-001', 'Av. Central', 'Centro', 500, 'Rio de Janeiro', 'RJ', maria_id),
+    (gen_random_uuid(), '30130-000', 'Av. Afonso Pena', 'Centro', 1000, 'Belo Horizonte', 'MG', pedro_id);
 
     -- Inserir dados na tabela Provedor
     INSERT INTO Provedor (Nome) VALUES

@@ -61,6 +61,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ManipuladorExcecoesApi>();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

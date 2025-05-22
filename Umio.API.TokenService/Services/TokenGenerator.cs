@@ -14,13 +14,13 @@ namespace Umio.API.TokenService.Services
         {
             _configuracoesJwt = configuracoesJwt;
         }
-        public string GerarToken(string email, string senha)
+        public string GerarToken(Guid clienteId)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuracoesJwt.Key));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, email)
+                new Claim(ClaimTypes.UserData, clienteId.ToString())
             };
 
             var token = new JwtSecurityToken(

@@ -28,7 +28,7 @@ namespace Umio.API.Application.CasosDeUso.Usuarios
 
             if (!usuario.ValidarSenha(senha)) throw new ExcecaoLogin();
 
-            var token = _tokenService.GerarToken(email, usuario.Senha);
+            var token = _tokenService.GerarToken(cliente.Id);
 
             return token;
         }

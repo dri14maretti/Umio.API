@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Umio.API.Application.CasosDeUso.Enderecos.Interfaces;
 using Umio.API.Application.Contratos;
+using Umio.API.Controllers.Models;
+using Umio.API.Entities.Entidades;
 
 namespace Umio.API.Controllers.Controllers
 {
@@ -26,7 +28,7 @@ namespace Umio.API.Controllers.Controllers
         {
             var endereco = await _buscarEnderecoApiExterna.Executar(cep);
 
-            return Ok(endereco);
+            return Ok(ApiRetorno<Endereco>.Sucesso(endereco));
         }
 
         [HttpPost("{clienteId}")]
@@ -42,7 +44,7 @@ namespace Umio.API.Controllers.Controllers
         {
             var enderecos = await _buscarEnderecosCliente.Executar(clienteId);
 
-            return Ok(enderecos);
+            return Ok(ApiRetorno<IEnumerable<Endereco>>.Sucesso(enderecos));
         }
 
         [HttpDelete("{id}")]
@@ -50,7 +52,7 @@ namespace Umio.API.Controllers.Controllers
         {
             var endereco = await _excluirEndereco.Executar(id);
 
-            return Ok(endereco);
+            return NoContent();
         }
     }
 }

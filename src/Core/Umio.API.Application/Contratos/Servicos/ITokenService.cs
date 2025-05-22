@@ -2,6 +2,6 @@
 {
     public interface ITokenService
     {
-        public string GerarToken(string email, string senha);
+        public string GerarToken(Guid clienteId);
     }
 }

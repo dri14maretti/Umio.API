@@ -4,6 +4,7 @@ using Umio.API.Application.CasosDeUso.Clientes.Interfaces;
 using Umio.API.Controllers.Dtos.Requests;
 using Umio.API.Controllers.DTOs.Requests;
 using Umio.API.Controllers.DTOs.Responses;
+using Umio.API.Controllers.Models;
 using Umio.API.Entities.Entidades;
 
 namespace Umio.API.Controllers.Controllers
@@ -47,27 +48,20 @@ namespace Umio.API.Controllers.Controllers
             );
 
             var result = await _criarCliente.Executar(input);
-            return Ok(result);
+            return Ok(ApiRetorno<CriarClienteOutput>.Sucesso(result));
         }
 
         [HttpPatch("{id:guid}")]
         public async Task<IActionResult> Atualizar(Guid id, [FromBody] AtualizarClienteRequest usuarioAtualizado)
         {
-            try
-            {
-                var cliente = await _atualizarCliente.Executar(
-                    id,
-                    usuarioAtualizado.Nome,
-                    usuarioAtualizado.Telefone,
-                    usuarioAtualizado.Email,
-                    usuarioAtualizado.Pontos
-                );
-                return cliente is null ? NotFound() : Ok(cliente);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var cliente = await _atualizarCliente.Executar(
+                id,
+                usuarioAtualizado.Nome,
+                usuarioAtualizado.Telefone,
+                usuarioAtualizado.Email,
+                usuarioAtualizado.Pontos
+            );
+            return cliente is null ? NotFound() : Ok(ApiRetorno<Cliente>.Sucesso(cliente));
         }
 
         [HttpDelete("{id:guid}")]
@@ -83,7 +77,7 @@ namespace Umio.API.Controllers.Controllers
         public async Task<IActionResult> ListarComFiltros([FromQuery] string? nome = null, [FromQuery] string? email = null, [FromQuery] Guid? id = null)
         {
             var clientes = await _listarClientes.Executar(nome, email, id);
-            return Ok(clientes);
+            return Ok(ApiRetorno<IEnumerable<Cliente>>.Sucesso(clientes));
         }
     }
 }
