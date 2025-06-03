@@ -40,6 +40,19 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+var corsPolicy = "AllowAll";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsPolicy,
+        policy =>
+        {
+            policy.AllowAnyOrigin() // Not for production!
+                  .AllowAnyMethod()
+                  .AllowAnyHeader();
+        });
+});
+
 
 builder.Services
     .AdicionarAplicacao()
@@ -64,6 +77,10 @@ if (app.Environment.IsDevelopment())
 app.UseMiddleware<ManipuladorExcecoesApi>();
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors(corsPolicy);
 
 app.UseAuthorization();
 
