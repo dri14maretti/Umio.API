@@ -4,7 +4,7 @@ using Umio.API.Entities.Entidades;
 
 namespace Umio.API.Application.CasosDeUso.CategoriasProduto
 {
-    internal class ListarCategoriasProduto : IListarCategoriasProduto
+    public class ListarCategoriasProduto : IListarCategoriasProduto
     {
         private readonly ICategoriaProdutoRepository _categoriaProdutoRepository;
         public ListarCategoriasProduto(ICategoriaProdutoRepository categoriaProdutoRepository)
