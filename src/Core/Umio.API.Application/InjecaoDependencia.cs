@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Umio.API.Application.CasosDeUso.CategoriasProduto;
+using Umio.API.Application.CasosDeUso.CategoriasProduto.Interfaces;
 using Umio.API.Application.CasosDeUso.Clientes;
 using Umio.API.Application.CasosDeUso.Clientes.Interfaces;
 using Umio.API.Application.CasosDeUso.Enderecos;
@@ -27,6 +29,8 @@ namespace Umio.API.Application
             services.AddTransient<ILoginUsuario, LoginUsuario>();
 
             services.AddTransient<IListarProdutos, ListarProdutos>();
+
+            services.AddTransient<IListarCategoriasProduto, ListarCategoriasProduto>();
 
             return services;
         }   
