@@ -20,7 +20,7 @@ namespace Umio.API.Entities.Entidades.Produtos
         [Column("ativo")]
         public bool Ativo { get; private set; } = true;
 
-        private Produto(int id, string nome, decimal preco, string descricao, string imagem, int categoriaId, bool ativo)
+        public Produto(int id, string nome, decimal preco, string descricao, string imagem, int categoriaId, bool ativo)
         {
             Id = id;
             Nome = nome;

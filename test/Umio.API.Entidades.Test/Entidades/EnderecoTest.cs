@@ -1,4 +1,5 @@
-﻿using Umio.API.Entities.Entidades;
+﻿using FluentAssertions;
+using Umio.API.Entities.Entidades;
 using Umio.API.Entities.Exceptions;
 using Umio.API.TestData.Entidades;
 
@@ -9,7 +10,7 @@ namespace Umio.API.Entidades.Test.Entidades
         [Fact]
         public void CriarNovoEndereco_DeveCriarEnderecoComDadosValidos()
         {
-            // Arrange
+            // Arrange  
             var cep = DadosEndereco.Cep;
             var rua = DadosEndereco.Rua;
             var bairro = DadosEndereco.Bairro;
@@ -19,20 +20,20 @@ namespace Umio.API.Entidades.Test.Entidades
             var clienteId = DadosEndereco.ClienteId;
             var complemento = DadosEndereco.Complemento;
 
-            // Act
+            // Act  
             var endereco = Endereco.CriarNovoEndereco(cep, rua, bairro, cidade, uf, numero, clienteId, complemento);
 
-            // Assert
-            Assert.NotNull(endereco);
-            Assert.Equal(cep, endereco.Cep);
-            Assert.Equal(rua, endereco.Rua);
-            Assert.Equal(bairro, endereco.Bairro);
-            Assert.Equal(cidade, endereco.Cidade);
-            Assert.Equal(uf, endereco.UF);
-            Assert.Equal(numero, endereco.Numero);
-            Assert.Equal(clienteId, endereco.ClienteId);
-            Assert.Equal(complemento, endereco.Complemento);
-            Assert.True(endereco.Ativo);
+            // Assert  
+            endereco.Should().NotBeNull();
+            endereco.Cep.Should().Be(cep);
+            endereco.Rua.Should().Be(rua);
+            endereco.Bairro.Should().Be(bairro);
+            endereco.Cidade.Should().Be(cidade);
+            endereco.UF.Should().Be(uf);
+            endereco.Numero.Should().Be(numero);
+            endereco.ClienteId.Should().Be(clienteId);
+            endereco.Complemento.Should().Be(complemento);
+            endereco.Ativo.Should().BeTrue();
         }
 
         [Theory]
@@ -41,7 +42,7 @@ namespace Umio.API.Entidades.Test.Entidades
         [InlineData(null)]
         public void CriarNovoEndereco_DeveLancarExcecaoParaCepInvalido(string cep)
         {
-            // Arrange
+            // Arrange  
             var rua = DadosEndereco.Rua;
             var bairro = DadosEndereco.Bairro;
             var cidade = DadosEndereco.Cidade;
@@ -49,59 +50,61 @@ namespace Umio.API.Entidades.Test.Entidades
             var numero = DadosEndereco.Numero;
             var clienteId = DadosEndereco.ClienteId;
 
-            // Act & Assert
-            Assert.Throws<ExcecaoPropriedadeInvalida>(() => Endereco.CriarNovoEndereco(cep, rua, bairro, cidade, uf, numero, clienteId));
+            // Act & Assert  
+            Action act = () => Endereco.CriarNovoEndereco(cep, rua, bairro, cidade, uf, numero, clienteId);
+            act.Should().Throw<ExcecaoPropriedadeInvalida>();
         }
 
         [Fact]
         public void CriarNovoEndereco_DeveLancarExcecaoParaNumeroInvalido()
         {
-            // Arrange
+            // Arrange  
             var cep = DadosEndereco.Cep;
             var rua = DadosEndereco.Rua;
             var bairro = DadosEndereco.Bairro;
             var cidade = DadosEndereco.Cidade;
             var uf = DadosEndereco.UF;
-            var numero = 0; // Número inválido
+            var numero = 0; // Número inválido  
             var clienteId = DadosEndereco.ClienteId;
 
-            // Act & Assert
-            Assert.Throws<ExcecaoPropriedadeInvalida>(() => Endereco.CriarNovoEndereco(cep, rua, bairro, cidade, uf, numero, clienteId));
+            // Act & Assert  
+            Action act = () => Endereco.CriarNovoEndereco(cep, rua, bairro, cidade, uf, numero, clienteId);
+            act.Should().Throw<ExcecaoPropriedadeInvalida>();
         }
 
         [Fact]
         public void CriarEnderecoSemNumero_DeveCriarEnderecoComDadosValidos()
         {
-            // Arrange
+            // Arrange  
             var cep = DadosEndereco.Cep;
             var rua = DadosEndereco.Rua;
             var bairro = DadosEndereco.Bairro;
             var cidade = DadosEndereco.Cidade;
             var uf = DadosEndereco.UF;
 
-            // Act
+            // Act  
             var endereco = Endereco.CriarEnderecoSemNumero(cep, rua, bairro, cidade, uf);
 
-            // Assert
-            Assert.NotNull(endereco);
-            Assert.Equal(cep, endereco.Cep);
-            Assert.Equal(rua, endereco.Rua);
-            Assert.Equal(bairro, endereco.Bairro);
-            Assert.Equal(cidade, endereco.Cidade);
-            Assert.Equal(uf, endereco.UF);
+            // Assert  
+            endereco.Should().NotBeNull();
+            endereco.Cep.Should().Be(cep);
+            endereco.Rua.Should().Be(rua);
+            endereco.Bairro.Should().Be(bairro);
+            endereco.Cidade.Should().Be(cidade);
+            endereco.UF.Should().Be(uf);
         }
 
         [Fact]
         public void DesativarEndereco_DeveAlterarPropriedadeAtivoParaFalso()
         {
-            // Arrange
+            // Arrange  
             var endereco = DadosEndereco.EnderecoValido;
 
-            // Act
+            // Act  
             endereco.DesativarEndereco();
 
-            // Assert
-            Assert.False(endereco.Ativo);
+            // Assert  
+            endereco.Ativo.Should().BeFalse();
         }
     }
 }

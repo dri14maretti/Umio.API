@@ -3,7 +3,6 @@ using Umio.API.Application.CasosDeUso.Clientes.Inputs;
 using Umio.API.Application.CasosDeUso.Clientes.Interfaces;
 using Umio.API.Controllers.Dtos.Requests;
 using Umio.API.Controllers.DTOs.Requests;
-using Umio.API.Controllers.DTOs.Responses;
 using Umio.API.Controllers.Models;
 using Umio.API.Entities.Entidades;
 
