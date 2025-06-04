@@ -1,19 +1,39 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.RegularExpressions;
 using Umio.API.Entities.Exceptions;
 
 namespace Umio.API.Entities.Entidades
 {
+    [Table("cliente")]
     public class Cliente
     {
+        [Key]
+        [Column("id")]
         public Guid Id { get; private set; }
+        [Column("nome")]
         public string Nome { get; private set; }
+        [Column("email")]
         public string Email { get; private set; }
+        [Column("telefone")]
         public string Telefone { get; private set; }
+        [Column("pontos")]
         public int Pontos { get; private set; }
-        public List<Endereco> Enderecos { get; private set; } = [];
-        public List<Pedido> Pedidos { get; private set; } = [];
+
+        private Cliente(string nome, string email, string telefone)
+        {
+            Id = Guid.NewGuid();
+            Nome = nome;
+            Email = ValidarEmail(email);
+            Telefone = ValidarTelefone(telefone);
+            Pontos = 0;
+        }
 
 
+        public static Cliente CriarNovoCliente(string nome, string email, string telefone)
+        {
+            return new Cliente(nome, email, telefone);
+        }
         private static string ValidarEmail(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
@@ -35,13 +55,6 @@ namespace Umio.API.Entities.Entidades
 
             return apenasNumeros;
         }
-        public void AdicionarEndereco(Endereco endereco)
-        {
-            if (endereco == null)
-                throw new ArgumentNullException(nameof(endereco), "Endereço não pode ser nulo");
-
-            Enderecos.Add(endereco);
-        }
         public void AdicionarPontos(int pontos)
         {
             if (pontos <= 0)
@@ -49,13 +62,20 @@ namespace Umio.API.Entities.Entidades
 
             Pontos += pontos;
         }
-        public void AtualizarCliente(string nome, string telefone)
+        public void AtualizarCliente(string? nome = null, string? telefone = null, string? email = null, int? pontos = null)
         {
-            if (string.IsNullOrWhiteSpace(nome))
-                throw new ExcecaoPropriedadeInvalida(nameof(nome));
+            if (!string.IsNullOrWhiteSpace(nome))
+                Nome = nome;
 
-            Nome = nome;
-            Telefone = ValidarTelefone(telefone);
+            if (!string.IsNullOrWhiteSpace(telefone))
+
+                Telefone = ValidarTelefone(telefone);
+
+            if (!string.IsNullOrWhiteSpace(email))
+                Email = ValidarEmail(email);
+
+            if (pontos.HasValue)
+                Pontos = pontos.Value;
         }
     }
 }

@@ -1,12 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Umio.API.Entities.Entidades.Produtos;
 public class ItemPedido
 {
+    [Key]
     public Guid PedidoId { get; private set; }
-    public Guid ProdutoId { get; private set; }
+    public int ProdutoId { get; private set; }
     public Produto? Produto { get; private set; }
     public int Quantidade { get; private set; }
 
-    public ItemPedido(Guid pedidoId, Guid produtoId, int quantidade)
+    public ItemPedido(Guid pedidoId, int produtoId, int quantidade)
     {
         PedidoId = pedidoId;
         ProdutoId = produtoId;

@@ -1,6 +1,7 @@
 ﻿using Umio.API.Application.CasosDeUso.Enderecos.Interfaces;
 using Umio.API.Application.Contratos.Repositorios;
 using Umio.API.Entities.Entidades;
+using Umio.API.Entities.Exceptions;
 
 namespace Umio.API.Application.CasosDeUso.Enderecos
 {
@@ -20,7 +21,7 @@ namespace Umio.API.Application.CasosDeUso.Enderecos
 
             if (cliente == null)
             {
-                throw new Exception("Não é possível buscar endereços de um cliente inválido");
+                throw new ExcecaoParametroIncorreto(clienteId.ToString(), "Não é possível buscar endereços de um cliente inválido");
             }
 
             var enderecos = await _enderecoRepository.BuscarEnderecosCliente(clienteId);

@@ -31,8 +31,8 @@ namespace Umio.API.Application.CasosDeUso.Enderecos
                 request.Cidade,
                 request.Estado, 
                 request.Numero, 
-                request.Complemento,
-                clienteId);
+                clienteId,
+                request.Complemento);
 
             return await _enderecoRepository.CriarEndereco(endereco);
 

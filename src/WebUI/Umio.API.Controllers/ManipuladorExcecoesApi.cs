@@ -5,7 +5,7 @@ using Umio.API.Entities.Exceptions;
 
 namespace Umio.API.Controllers
 {
-    public class ManipuladorExcecoesApi
+    public class ManipuladorExcecoesApi : IMiddleware
     {
         private readonly ILogger<ManipuladorExcecoesApi> _logger;
 
@@ -24,7 +24,19 @@ namespace Umio.API.Controllers
             {
                 GerarHistoricoErros(exPropriedadeInvalida);
                 var json = GerarRetorno(context, exPropriedadeInvalida);
-                await GerarRespostaContexto(context, json);
+                await GerarRespostaContexto(context, json, HttpStatusCode.BadRequest);
+            }
+            catch (ExcecaoLogin exLogin)
+            {
+                GerarHistoricoErros(exLogin);
+                var json = GerarRetorno(context, exLogin);
+                await GerarRespostaContexto(context, json, HttpStatusCode.BadRequest);
+            }
+            catch (ExcecaoParametroIncorreto exParametroIncorreto)
+            {
+                GerarHistoricoErros(exParametroIncorreto);
+                var json = GerarRetorno(context, exParametroIncorreto);
+                await GerarRespostaContexto(context, json, HttpStatusCode.BadRequest);
             }
             catch (Exception ex)
             {
