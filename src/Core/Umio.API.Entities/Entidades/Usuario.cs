@@ -35,9 +35,24 @@ namespace Umio.API.Entities.Entidades
 
         public static Usuario CriarNovoUsuario(string senha, Guid clienteId, Provedor provedor)
         {
+            if (!SenhaForte(senha))
+
+                throw new ArgumentException("A senha deve conter pelo menos 6 caracteres, incluindo letras maiúsculas, minúsculas, números e caracteres especiais.", nameof(senha));
+
+
             var senhaCriptografada = CryptoSenha(senha);
 
             return new Usuario(senhaCriptografada, clienteId, provedor);
+        }
+
+        private static bool SenhaForte(string senha)
+        {
+            return !string.IsNullOrWhiteSpace(senha) &&
+            senha.Length >= 6 &&
+            senha.Any(char.IsUpper) &&
+            senha.Any(char.IsLower) &&
+            senha.Any(char.IsDigit) &&
+            senha.Any(c => !char.IsLetterOrDigit(c));
         }
 
         public bool ValidarSenha(string senha)
