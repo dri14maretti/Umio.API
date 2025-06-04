@@ -6,7 +6,7 @@ using Umio.API.Entities.Exceptions;
 
 namespace Umio.API.Application.CasosDeUso.Usuarios
 {
-    internal class LoginUsuario : ILoginUsuario
+    public class LoginUsuario : ILoginUsuario
     {
         private readonly IClienteRepository _clienteRepository;
         private readonly IUsuarioRepository _usuarioRepository;
