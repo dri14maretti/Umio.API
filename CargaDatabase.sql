@@ -152,6 +152,10 @@ INSERT INTO Produto (Nome, Preco, Descricao, CategoriaId, Imagem) VALUES
 
 UPDATE Produto SET Ativo = TRUE; 
 
+UPDATE produto SET imagem = 'https://umio-app.s3.us-east-1.amazonaws.com/Produtos/' || nome || '.jpg';
+
+SELECT * FROM produto
+
 -- Inserir dados na tabela Adicional
 INSERT INTO Adicional (Nome, Valor) VALUES
 ('Bacon Extra', 5.00),
@@ -249,3 +253,6 @@ INSERT INTO CupomProduto (CodigoCupom, ProdutoId) VALUES
 ('MAIS5OFF', (SELECT Id FROM Produto WHERE Nome = 'Coca Cola Zero')); -- Cupom se aplica ao Refrigerante Lata
 -- O cupom FRETEZERO geralmente não se aplica a produtos específicos, mas ao pedido inteiro.
 -- Se ele precisasse estar aqui para alguma regra, a lógica seria diferente.
+
+
+UPDATE produto SET imagem = 'https://umio-app.s3.us-east-1.amazonaws.com/Produtos/lanche' || (id % 3 + 1) || '.png'
