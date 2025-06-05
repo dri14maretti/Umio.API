@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Umio.API.Application.CasosDeUso.Produtos.Interfaces;
 using Umio.API.Controllers.Models;
 using Umio.API.Entities.Entidades.Produtos;
@@ -7,6 +8,7 @@ namespace Umio.API.Controllers.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ProdutoController : ControllerBase
     {
         private readonly IListarProdutos _listarProdutos;

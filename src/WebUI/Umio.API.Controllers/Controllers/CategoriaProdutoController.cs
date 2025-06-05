@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Umio.API.Application.CasosDeUso.CategoriasProduto.Interfaces;
 using Umio.API.Controllers.Models;
 using Umio.API.Entities.Entidades;
@@ -6,6 +7,7 @@ using Umio.API.Entities.Entidades;
 namespace Umio.API.Controllers.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("[controller]")]
     public class CategoriaProdutoController : ControllerBase
     {

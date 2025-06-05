@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Umio.API.Application.CasosDeUso.Enderecos.Interfaces;
 using Umio.API.Application.Contratos;
 using Umio.API.Controllers.Models;
@@ -8,6 +9,7 @@ namespace Umio.API.Controllers.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class EnderecoController : ControllerBase
     {
         private readonly IBuscarEnderecoApiExterna _buscarEnderecoApiExterna;
@@ -24,6 +26,7 @@ namespace Umio.API.Controllers.Controllers
         }
 
         [HttpGet("porCep/{cep}")]
+
         public async Task<IActionResult> Get(string cep)
         {
             var endereco = await _buscarEnderecoApiExterna.Executar(cep);
@@ -32,6 +35,7 @@ namespace Umio.API.Controllers.Controllers
         }
 
         [HttpPost("{clienteId}")]
+
         public async Task<IActionResult> CriarNovoEndereco(Guid clienteId, [FromBody]CriarEnderecoRequest request)
         {
             var endereco = await _criarEndereco.Executar(request, clienteId);
@@ -40,6 +44,7 @@ namespace Umio.API.Controllers.Controllers
         }
         
         [HttpGet("{clienteId}")]
+
         public async Task<IActionResult> BuscarEnderecosCliente(Guid clienteId)
         {
             var enderecos = await _buscarEnderecosCliente.Executar(clienteId);
@@ -48,6 +53,7 @@ namespace Umio.API.Controllers.Controllers
         }
 
         [HttpDelete("{id}")]
+
         public async Task<IActionResult> ExcluirEndereco(Guid id)
         {
             var endereco = await _excluirEndereco.Executar(id);

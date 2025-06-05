@@ -9,6 +9,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Umio.API.TokenService.Models;
 using Umio.API.TokenService;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +23,39 @@ builder.Services.AddSwaggerGen();
 
 ConfiguracoesJwt jwtSettings = new ConfiguracoesJwt();
 builder.Configuration.GetSection("JwtSettings").Bind(jwtSettings);
+
+builder.Services.AddSwaggerGen(x =>
+{
+    x.SwaggerDoc("v1", new OpenApiInfo { Title = "Umió API", Version = "v1" });
+
+    x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Token JWT obtido a partir da autenticação",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT"
+    });
+
+    x.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Id =  "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            new List<string>()
+        }
+    });
+
+    //var arquivoXml = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    //var caminhoXml = Path.Combine(AppContext.BaseDirectory, arquivoXml);
+    //x.IncludeXmlComments(caminhoXml);
+});
 
 builder.Services.AddAuthentication(options =>
 {
@@ -82,6 +117,7 @@ app.UseRouting();
 
 app.UseCors(corsPolicy);
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
