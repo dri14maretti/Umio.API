@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Umio.API.Application.CasosDeUso.Clientes.Inputs;
 using Umio.API.Application.CasosDeUso.Clientes.Interfaces;
 using Umio.API.Controllers.Dtos.Requests;
@@ -51,6 +52,7 @@ namespace Umio.API.Controllers.Controllers
         }
 
         [HttpPatch("{id:guid}")]
+        [Authorize]
         public async Task<IActionResult> Atualizar(Guid id, [FromBody] AtualizarClienteRequest usuarioAtualizado)
         {
             var cliente = await _atualizarCliente.Executar(
@@ -64,6 +66,7 @@ namespace Umio.API.Controllers.Controllers
         }
 
         [HttpDelete("{id:guid}")]
+        [Authorize]
         public async Task<IActionResult> Deletar(Guid id)
         {
             if (id == Guid.Empty) return BadRequest("ID inválido.");
@@ -73,6 +76,7 @@ namespace Umio.API.Controllers.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> ListarComFiltros([FromQuery] string? nome = null, [FromQuery] string? email = null, [FromQuery] Guid? id = null)
         {
             var clientes = await _listarClientes.Executar(nome, email, id);
