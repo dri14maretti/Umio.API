@@ -10,5 +10,7 @@ namespace Umio.API.Application.Contratos.Repositorios
         Task<bool> DeletarCliente(Guid clienteId);
         Task<Cliente> AtualizarCliente(Cliente cliente);
         Task<IEnumerable<Cliente>> ListarClientes(string? nome = null, string? email = null, Guid? id = null);
+        Task<Cliente?> BuscarPorEmail(string email);
+
     }
 }
