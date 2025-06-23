@@ -66,16 +66,16 @@ INSERT INTO StatusPedido (Status) VALUES
 ('Cancelado');
 
 INSERT INTO CategoriaProduto (Categoria) VALUES
-('Massas'),
-('Saladas'),
-('Lanchinhos'),
-('Pastéis'),
-('Porções'),
-('Burgers 160g'),
-('Vegetarianos'),
-('Smash Frango'),
-('Smash Burgers'),
-('Bebidas');
+('Massas', false),
+('Saladas', false),
+('Lanchinhos', true),
+('Pastéis', false),
+('Porções', false),
+('Burgers 160g', true),
+('Vegetarianos', true),
+('Smash Frango', true),
+('Smash Burgers', true),
+('Bebidas', false);
 
 -- Inserindo Produtos na tabela Produto
 -- Assumindo que os Ids da CategoriaProduto são gerados sequencialmente a partir de 1
@@ -158,9 +158,25 @@ SELECT * FROM produto
 
 -- Inserir dados na tabela Adicional
 INSERT INTO Adicional (Nome, Valor) VALUES
-('Bacon Extra', 5.00),
-('Cheddar Cremoso', 6.00),
-('Borda Recheada Catupiry', 10.00);
+('Adicional de Hambúrguer Vegetariano', 14.90),
+('Adicional de Hambúrguer Clássico', 11.90),
+('Adicional de Hambúrguer Smash', 6.90),
+('Adicional de Hambúrguer Smash de Frango', 6.90),
+('Adicional de Bacon', 5.90),
+('Adicional de Gorgonzola', 5.90),
+('Adicional de Onion Rings', 5.90),
+('Adicional de Cheddar Fatiado', 4.90),
+('Adicional de Catupiry', 4.90),
+('Adicional de Cheddar Cremoso', 4.90),
+('Adicional de American Cheese', 4.90),
+('Adicional de Cebola Caramelizada', 4.90),
+('Adicional de Calabresa', 4.90),
+('Adicional de Relish de Cebola Roxa', 4.90),
+('Adicional de Ovo', 2.90),
+('Adicional de Batata Palha', 1.90),
+('Adicional de Alface', 1.90),
+('Adicional de Tomate', 1.90),
+('Adicional de Cebola Roxa', 1.90);
 
 -- Inserir dados na tabela CategoriaAcompanhamento
 INSERT INTO CategoriaAcompanhamento (Categoria, MaximoGratis) VALUES

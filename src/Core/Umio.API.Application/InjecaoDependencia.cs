@@ -3,8 +3,12 @@ using Umio.API.Application.CasosDeUso.CategoriasProduto;
 using Umio.API.Application.CasosDeUso.CategoriasProduto.Interfaces;
 using Umio.API.Application.CasosDeUso.Clientes;
 using Umio.API.Application.CasosDeUso.Clientes.Interfaces;
+using Umio.API.Application.CasosDeUso.Cupoms;
+using Umio.API.Application.CasosDeUso.Cupoms.Interfaces;
 using Umio.API.Application.CasosDeUso.Enderecos;
 using Umio.API.Application.CasosDeUso.Enderecos.Interfaces;
+using Umio.API.Application.CasosDeUso.Pedidos;
+using Umio.API.Application.CasosDeUso.Pedidos.Interfaces;
 using Umio.API.Application.CasosDeUso.Produtos;
 using Umio.API.Application.CasosDeUso.Produtos.Interfaces;
 using Umio.API.Application.CasosDeUso.Usuarios;
@@ -32,6 +36,9 @@ namespace Umio.API.Application
 
             services.AddTransient<IListarCategoriasProduto, ListarCategoriasProduto>();
 
+            services.AddTransient<IBuscarCodigoCupom, BuscarCodigoCupom>();
+
+            services.AddTransient<IRealizarPedido, RealizarPedido>();
             return services;
         }   
     }

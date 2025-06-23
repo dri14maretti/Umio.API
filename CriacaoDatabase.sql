@@ -60,6 +60,7 @@ CREATE TABLE StatusPedido (
 CREATE TABLE CategoriaProduto (
     Id SERIAL PRIMARY KEY,
     Categoria VARCHAR(255) NOT NULL
+	HabilitarAdicionais BOOL DEFAULT FALSE
 );
 
 CREATE TABLE Produto (

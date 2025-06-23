@@ -14,6 +14,8 @@ namespace Umio.API.Entities.Entidades
         public int Id { get; private set; }
         [Column("categoria")]
         public string Categoria { get; private set; }
+        [Column("habilitaradicionais")]
+        public bool HabilitarAdicionais { get; set; }
 
     }
 }

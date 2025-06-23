@@ -21,6 +21,8 @@ namespace Umio.API.Postgres.Context
 
         public DbSet<CategoriaProduto> CategoriaProduto { get; set; }
 
+        public DbSet<Cupom> Cupoms { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
