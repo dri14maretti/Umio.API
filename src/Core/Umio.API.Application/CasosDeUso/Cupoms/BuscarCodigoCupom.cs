@@ -5,7 +5,7 @@ using Umio.API.Entities.Exceptions;
 
 namespace Umio.API.Application.CasosDeUso.Cupoms
 {
-    internal class BuscarCodigoCupom : IBuscarCodigoCupom
+    public class BuscarCodigoCupom : IBuscarCodigoCupom
     {
         private readonly ICupomRepository _cupomRepository;
         public BuscarCodigoCupom(ICupomRepository cupomRepository)

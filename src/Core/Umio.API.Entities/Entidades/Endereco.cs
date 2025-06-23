@@ -73,19 +73,19 @@ namespace Umio.API.Entities.Entidades
         public static Endereco CriarNovoEndereco(string cep, string rua, string bairro, string cidade, string uf, int numero, Guid clienteId, string? complemento = null)
         {
             if (string.IsNullOrWhiteSpace(cep) || !Regex.IsMatch(cep, @"^\d{8}$"))
-                throw new ExcecaoPropriedadeInvalida("CEP inválido.", nameof(cep));
+                throw new ExcecaoPropriedadeInvalida(nameof(cep), "CEP inválido.");
             if (string.IsNullOrWhiteSpace(rua))
-                throw new ExcecaoPropriedadeInvalida("Rua inválida.", nameof(rua));
+                throw new ExcecaoPropriedadeInvalida(nameof(rua), "Rua inválida.");
             if (string.IsNullOrWhiteSpace(bairro))
-                throw new ExcecaoPropriedadeInvalida("Bairro inválido.", nameof(bairro));
+                throw new ExcecaoPropriedadeInvalida(nameof(bairro), "Bairro inválido.");
             if (string.IsNullOrWhiteSpace(cidade))
-                throw new ExcecaoPropriedadeInvalida("Cidade inválida.", nameof(cidade));
+                throw new ExcecaoPropriedadeInvalida(nameof(cidade), "Cidade inválida.");
             if (string.IsNullOrWhiteSpace(uf) || uf.Length != 2)
-                throw new ExcecaoPropriedadeInvalida("UF inválido.", nameof(uf));
+                throw new ExcecaoPropriedadeInvalida(nameof(uf), "UF inválido.");
             if (numero <= 0)
-                throw new ExcecaoPropriedadeInvalida("Número inválido.", nameof(numero));
+                throw new ExcecaoPropriedadeInvalida(nameof(numero), "Número inválido.");
             if (clienteId == Guid.Empty)
-                throw new ExcecaoPropriedadeInvalida("Usuário inválido.", nameof(clienteId));
+                throw new ExcecaoPropriedadeInvalida(nameof(clienteId), "Usuário inválido.");
 
             return new Endereco(cep, rua, bairro, cidade, uf, numero, complemento, true, clienteId);
         }

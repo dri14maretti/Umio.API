@@ -5,7 +5,7 @@ using Umio.API.Entities.Exceptions;
 
 namespace Umio.API.Application.CasosDeUso.Enderecos
 {
-    internal class BuscarEnderecosCliente : IBuscarEnderecosCliente
+    public class BuscarEnderecosCliente : IBuscarEnderecosCliente
     {
         private readonly IEnderecoRepository _enderecoRepository;
         private readonly IClienteRepository _clienteRepository;
