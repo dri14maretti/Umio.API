@@ -1,69 +1,48 @@
-using Umio.API.Entities.Entidades.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Umio.API.Entities.Exceptions;
 
 namespace Umio.API.Entities.Entidades
 {
+    [Table("cupom")]
     public class Cupom
     {
-        public Guid Id { get; private set; }
+        private Cupom(string codigo, decimal porcentagemDesconto, bool ativo)
+        {
+            Codigo = codigo;
+            PorcentagemDesconto = porcentagemDesconto;
+            Ativo = ativo;
+        }
+
+        public static Cupom CriarCupom(string codigo, decimal porcentagemDesconto, bool ativo)
+        {
+            if (string.IsNullOrWhiteSpace(codigo))
+                throw new ArgumentException("Código do cupom não pode ser vazio.", nameof(codigo));
+            if (porcentagemDesconto < 0 || porcentagemDesconto > 100)
+                throw new ArgumentOutOfRangeException(nameof(porcentagemDesconto), "Porcentagem de desconto deve estar entre 0 e 100.");
+
+            return new Cupom(codigo, porcentagemDesconto, ativo);
+        }
+
+        [Key]
+        [Column("codigo")]
         public string Codigo { get; private set; } = "";
-        public decimal ValorDesconto { get; private set; }
-        public DateTime DataValidade { get; private set; }
-        public TipoDesconto TipoDesconto { get; private set; }
-        public bool Status { get; private set; } // True = Ativo
-        public int? UsosMaximos { get; private set; } // Null = ilimitado
-        public int UsosAtuais { get; private set; }
+        [Column("porcentagem")]
+        public decimal PorcentagemDesconto { get; private set; }
+        [Column("ativo")]
+        public bool Ativo { get; private set; } // True = Ativo
 
-        private Cupom() { }
-
-        public Cupom(string codigo, decimal valorDesconto, DateTime dataValidade, TipoDesconto tipoDesconto, int? usosMaximos = null)
-        {
-            Id = Guid.NewGuid();
-            Codigo = codigo.ToUpper();
-            ValorDesconto = valorDesconto;
-            DataValidade = dataValidade;
-            TipoDesconto = tipoDesconto;
-            UsosMaximos = usosMaximos;
-            UsosAtuais = 0;
-            Status = true; // Default deixa ativo
-
-            Validar();
-        }
-        public bool EstaValido()
-        {
-            return Status &&
-            DataValidade >= DateTime.UtcNow &&
-            (UsosMaximos == null || UsosAtuais < UsosMaximos);
-        }
 
         public decimal AplicarDesconto(decimal total)
-    {
-        return TipoDesconto == TipoDesconto.Porcentagem
-            ? total * (1 - ValorDesconto) 
-            : total - ValorDesconto;
-    }
+        {
+            if (!Ativo) throw new ExcecaoPropriedadeInvalida(Codigo);
+            return total * (100 - PorcentagemDesconto) / 100;
+        }
 
         public void Ativar()
         {
-            Status = true;
-            UsosAtuais = 0;
+            Ativo = true;
         }
-        public void Desativar() => Status = false;
-
-        public void AtualizarDesconto(decimal novoValor)
-        {
-            if (novoValor <= 0)
-                throw new ArgumentException("Valor deve ser positivo");
-
-            ValorDesconto = novoValor;
-        }
-
-        private void Validar()
-        {
-            if (ValorDesconto <= 0)
-                throw new ArgumentException("Valor de desconto invÃ¡lido");
-
-            if (DataValidade < DateTime.UtcNow)
-                throw new ArgumentException("Data de validade expirada");
-        }
+        public void Desativar() => Ativo = false;
     }
 }

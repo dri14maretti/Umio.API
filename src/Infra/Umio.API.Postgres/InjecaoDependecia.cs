@@ -12,6 +12,8 @@ namespace Umio.API.Postgres
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<ICategoriaProdutoRepository, CategoriaProdutoRepository>();
+            services.AddTransient<ICupomRepository, CupomRepository>();
+            services.AddTransient<IPedidoRepository, PedidoRepository>();
 
             return services;
         }

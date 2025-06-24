@@ -6,11 +6,11 @@
         {
         }
 
-        public ExcecaoParametroIncorreto(string parametro, string mensagem) : base($"A parametro '{parametro}' é inválida. {mensagem}")
+        public ExcecaoParametroIncorreto(string parametro, string mensagem) : base($"O parametro '{parametro}' é inválido. {mensagem}")
         {
         }
 
-        public ExcecaoParametroIncorreto(string parametro, string mensagem, Exception innerException) : base($"A parametro '{parametro}' é inválida. {mensagem}", innerException)
+        public ExcecaoParametroIncorreto(string parametro, string mensagem, Exception innerException) : base($"O parametro '{parametro}' é inválido. {mensagem}", innerException)
         {
         }
     }

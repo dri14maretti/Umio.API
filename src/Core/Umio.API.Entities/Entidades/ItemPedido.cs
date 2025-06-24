@@ -1,37 +1,18 @@
 using System.ComponentModel.DataAnnotations;
-using System.Text.Json.Serialization;
 using Umio.API.Entities.Entidades.Produtos;
 public class ItemPedido
 {
     [Key]
     public Guid PedidoId { get; private set; }
-    public int ProdutoId { get; private set; }
     public Produto? Produto { get; private set; }
     public int Quantidade { get; private set; }
+    public string Comentario { get; private set; }
 
-    public ItemPedido(Guid pedidoId, int produtoId, int quantidade)
+    public ItemPedido(Guid pedidoId, Produto produto, int quantidade, string comentario)
     {
         PedidoId = pedidoId;
-        ProdutoId = produtoId;
-        Produto = null; 
+        Produto = produto; 
         Quantidade = quantidade;
-    }
-
-    public void AdicionarProduto(Produto produto)
-    {
-        if (produto == null)
-            throw new ArgumentNullException(nameof(produto), "Produto não pode ser nulo.");
-
-        if (produto.Id != ProdutoId)
-            throw new InvalidOperationException("O ID do produto não corresponde ao ProdutoId do ItemPedido.");
-
-        Produto = produto;
-    }
-    public void AtualizarQuantidade(int quantidade)
-    {
-        if (quantidade <= 0)
-            throw new ArgumentException("A quantidade deve ser maior que zero.", nameof(quantidade));
-
-        Quantidade = quantidade;
+        Comentario = comentario;
     }
 }

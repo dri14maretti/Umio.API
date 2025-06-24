@@ -9,7 +9,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Umio.API.TokenService.Models;
 using Umio.API.TokenService;
-
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,10 +24,44 @@ builder.Services.AddSwaggerGen();
 ConfiguracoesJwt jwtSettings = new ConfiguracoesJwt();
 builder.Configuration.GetSection("JwtSettings").Bind(jwtSettings);
 
+builder.Services.AddSwaggerGen(x =>
+{
+    x.SwaggerDoc("v1", new OpenApiInfo { Title = "Umi� API", Version = "v1" });
+
+    x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = "Token JWT obtido a partir da autentica��o",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT"
+    });
+
+    x.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Id =  "Bearer",
+                    Type = ReferenceType.SecurityScheme
+                }
+            },
+            new List<string>()
+        }
+    });
+
+    //var arquivoXml = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    //var caminhoXml = Path.Combine(AppContext.BaseDirectory, arquivoXml);
+    //x.IncludeXmlComments(caminhoXml);
+});
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
     options.SaveToken = true;
@@ -38,6 +74,13 @@ builder.Services.AddAuthentication(options =>
         ValidIssuer = jwtSettings.Issuer,
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(jwtSettings.Key)),
     };
+})
+.AddCookie()
+.AddGoogle(options =>
+{
+    options.ClientId = "CLIENTE_ID_AQUI";
+    options.ClientSecret = "CLIENTE_SECRET_AQUI";
+    options.CallbackPath = "/signin-google";
 });
 
 var corsPolicy = "AllowAll";
@@ -82,6 +125,7 @@ app.UseRouting();
 
 app.UseCors(corsPolicy);
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

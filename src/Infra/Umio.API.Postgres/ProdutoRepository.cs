@@ -12,6 +12,15 @@ namespace Umio.API.Postgres
         {
             _context = context;
         }
+
+        public async Task<Dictionary<int, Produto>> BuscarProdutosPorListaId(IEnumerable<int> listaId)
+        {
+            var produtos = await _context.Produtos
+                .Where(p => listaId.Contains(p.Id))
+                .ToDictionaryAsync(p => p.Id, p => p);
+            return produtos;
+        }
+
         public async Task<IEnumerable<Produto>> ListarProdutos()
         {
             var produtos = await _context.Produtos.ToListAsync();

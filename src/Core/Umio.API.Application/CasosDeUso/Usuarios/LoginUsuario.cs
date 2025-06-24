@@ -20,8 +20,10 @@ namespace Umio.API.Application.CasosDeUso.Usuarios
         }
         public async Task<string> GerarToken(string email, string senha)
         {
-            var cliente = (await _clienteRepository.ListarClientes(email: email)).First();
-            if (cliente == null) throw new ExcecaoLogin();
+            var clientes = await _clienteRepository.ListarClientes(email: email);
+            if (!clientes.Any()) throw new ExcecaoLogin();
+
+            var cliente = clientes.First();
 
             var usuario = await _usuarioRepository.BuscarPorClienteIdProvedorId(cliente.Id, Provedor.Umio);
             if (usuario == null) throw new ExcecaoLogin();

@@ -28,8 +28,23 @@ namespace Umio.API.Entities.Entidades
             Telefone = ValidarTelefone(telefone);
             Pontos = 0;
         }
+        
+        private Cliente(Guid id, string nome, string email, string telefone)
+        {
+            Id = id;
+            Nome = nome;
+            Email = ValidarEmail(email);
+            Telefone = ValidarTelefone(telefone);
+            Pontos = 0;
+        }
 
+        public static Cliente ConstruirClientExistente(Guid id, string nome, string email, string telefone)
+        {
+            if (id == Guid.Empty)
+                throw new ArgumentException("ID do cliente não pode ser vazio", nameof(id));
 
+            return new Cliente(id, nome, email, telefone);
+        }
         public static Cliente CriarNovoCliente(string nome, string email, string telefone)
         {
             return new Cliente(nome, email, telefone);

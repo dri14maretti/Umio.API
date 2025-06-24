@@ -5,7 +5,7 @@ using Umio.API.Entities.Entidades;
 
 namespace Umio.API.Application.CasosDeUso.Enderecos
 {
-    internal class CriarEndereco : ICriarEndereco
+    public class CriarEndereco : ICriarEndereco
     {
         private readonly IEnderecoRepository _enderecoRepository;
         private readonly IClienteRepository _clienteRepository;

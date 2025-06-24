@@ -7,7 +7,7 @@ namespace Umio.API.Entities.Entidades
 
         public Guid Id { get; private set; }
         public Guid ClienteId { get; private set; }
-        public Guid EnderecoId { get; private set; }
+        public Endereco Endereco { get; private set; }
         public List<ItemPedido> Itens { get; private set; } = [];
         public string Comentarios { get; private set; } = "";
         public decimal ValorEntrega { get; private set; }
@@ -18,16 +18,11 @@ namespace Umio.API.Entities.Entidades
         public Guid? PagamentoId { get; private set; }
         public Pagamento? Pagamento { get; private set; }
 
-        private Pedido()
-        {
-            Itens = [];
-        }
-
-        public Pedido(Guid clienteId, Guid enderecoId, string comentarios, decimal valorEntrega, Cupom? cupom = null)
+        public Pedido(Guid clienteId, Endereco endereco, string comentarios, decimal valorEntrega, Cupom? cupom = null)
         {
             Id = Guid.NewGuid();
             ClienteId = clienteId;
-            EnderecoId = enderecoId;
+            Endereco = endereco;
             Comentarios = comentarios;
             ValorEntrega = valorEntrega;
             Cupom = cupom;
@@ -43,12 +38,7 @@ namespace Umio.API.Entities.Entidades
                 (item.Produto?.Preco ?? 0) * item.Quantidade);
             decimal total = subtotalItens + ValorEntrega;
 
-            if (Cupom?.EstaValido() == true)
-            {
-                total -= Cupom.ValorDesconto;
-            }
-
-            return total;
+            return Cupom != null ? AplicarCupom(total) : total;
         }
 
         public void AdicionarItem(ItemPedido item)
@@ -73,16 +63,15 @@ namespace Umio.API.Entities.Entidades
                 throw new ArgumentException("Valor de entrega inválido");
         }
 
-        public void AplicarCupom(Cupom cupom)
+        public decimal AplicarCupom(decimal total)
         {
             if (Status != StatusPedido.Pendente)
                 throw new InvalidOperationException("Pedido já processado");
 
-            if (!cupom.EstaValido())
+            if (Cupom == null)
                 throw new InvalidOperationException("Cupom inválido");
 
-            Cupom = cupom;
-            cupom.AplicarDesconto(Total);
+            return Cupom.AplicarDesconto(Total);
         }
 
         public void AdicionarPagamento(Pagamento pagamento)

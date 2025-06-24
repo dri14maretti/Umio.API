@@ -45,6 +45,12 @@ namespace Umio.API.Entities.Entidades
             return new Usuario(senhaCriptografada, clienteId, provedor);
         }
 
+        public static Usuario CriarUsuarioOAuth(Guid clienteId, Provedor provedor)
+        {
+            return new Usuario(Guid.NewGuid(), "", clienteId, provedor);
+        }
+
+
         private static bool SenhaForte(string senha)
         {
             return !string.IsNullOrWhiteSpace(senha) &&

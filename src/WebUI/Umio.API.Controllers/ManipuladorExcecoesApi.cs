@@ -38,6 +38,12 @@ namespace Umio.API.Controllers
                 var json = GerarRetorno(context, exParametroIncorreto);
                 await GerarRespostaContexto(context, json, HttpStatusCode.BadRequest);
             }
+            catch (ExcecaoElementoNaoEncontrado exElemento)
+            {
+                GerarHistoricoErros(exElemento);
+                var json = GerarRetorno(context, exElemento);
+                await GerarRespostaContexto(context, json, HttpStatusCode.NotFound);
+            }
             catch (Exception ex)
             {
                 GerarHistoricoErros(ex);

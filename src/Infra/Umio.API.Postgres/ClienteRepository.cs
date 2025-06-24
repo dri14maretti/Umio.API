@@ -110,5 +110,10 @@ namespace Umio.API.Postgres
             await _context.SaveChangesAsync();
             return true;
         }
+        public async Task<Cliente?> BuscarPorEmail(string email)
+        {
+            return await _context.Clientes
+                .FirstOrDefaultAsync(c => c.Email.ToLower() == email.ToLower());
+        }
     }
 }
