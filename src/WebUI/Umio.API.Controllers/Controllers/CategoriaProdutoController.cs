@@ -7,7 +7,6 @@ using Umio.API.Entities.Entidades;
 namespace Umio.API.Controllers.Controllers
 {
     [ApiController]
-    [Authorize]
     [Route("[controller]")]
     public class CategoriaProdutoController : ControllerBase
     {
